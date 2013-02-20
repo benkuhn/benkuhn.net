@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load md %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+{% markdown %}
+
+<img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
+
+I study math and computer science at Harvard. When I'm not doing that,
+I enjoy [making things](/projects/), reading, playing piano,
+[singing](http://www.harvardgleeclub.org/), [contra
+dancing](http://en.wikipedia.org/wiki/Contra_dance), and various other
+strange activities.
+
+If you want to know Serious Things, I have a [resume]({{ STATIC_PREFIX }}resume.pdf). Or you can read some...
+
+## Posts ##
+
+{% for post in posts %}
+### [{{ post.title }}]({{ post.url }}) ###
+{% endfor %}
+
+{% endmarkdown %}
+{% endblock %}

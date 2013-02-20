@@ -1,0 +1,50 @@
+#nav {
+    padding-left: 0;
+}
+#nav li {
+    display: inline;
+}
+#nav li:after {
+    content: " ~";
+}
+#nav li:last-child:after {
+    content: "";
+}
+
+a {
+    text-decoration:none;
+    color:#14B;
+}
+a:hover {
+    text-decoration:underline;
+}
+a:visited {
+    color:#108;
+}
+
+body {
+    width:640px;
+    margin:auto;
+    color:#222;
+    font: 1em georgia, serif;
+}
+#posts > p, * /*TODO fix*/ p + p {
+    text-indent:0.25in;
+}
+.post_title {
+    display:inline;
+}
+.info,.abccredit {
+    color:#666;
+}
+.abccredit {
+    font-style: italic;
+    text-align: center;
+}
+div.abcrendered {
+    margin: 0 -50px -50px;
+}
+img.me {
+    float:left;
+    margin: 0 10px;
+}

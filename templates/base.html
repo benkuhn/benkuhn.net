@@ -1,0 +1,38 @@
+{% load static %}
+{% load md %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>{% block title %}base template{% endblock %} | benkuhn.net</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-33921253-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <div>
+      <h1>Ben Kuhn</h1>
+      <ul id="nav">
+        <li><a href="/">about</a></li>
+        <li><a href="/projects/">projects</a></li>
+        <li><a href="/other/">other</a></li>
+        <li><a href="/contact/">contact</a></li>
+      </ul>
+      <div id="main">{% block content %}content goes here{% endblock %}</div>
+    </div>
+  </body>
+</html>

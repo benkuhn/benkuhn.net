@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load md %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+
+{% markdown %}
+I'm currently working on:
+
+[Harvard Class](http://harvard-class.com/), an improved course catalog
+and search tool for Harvard. In the three days after our launch, we
+received 2400 unique visitors and 200 registered users and were
+featured in the [Harvard Crimson][hc-crimson] and
+[BostInno][hc-bostinno]. We now boast 25% of the undergraduate student
+body as registered users, and we're still working hard to add more
+features.
+
+Previously, I've worked on:
+
+[Trello](https://trello.com/), a "whiteboard with superpowers" that
+helps keep people and teams organized. Trello is made by [Fog Creek
+Software](http://www.fogcreek.com/), where I interned in summer 2012.
+
+[Gimblium](http://www.gimblium.com/), an online collaborative game
+development suite, with [Billy Janitsch](http://billyjanitsch.com). I
+do the server, some front-end work, and the game engine. Gimblium
+began as a final project for [cs50](http://cs50.net/), so most of what
+you see here was implemented in about a week.
+
+[Seaweed](http://cweed.org/), a platform for creating and running
+economics experiments. I took over programming work during the
+academic year of '11-12.
+
+During summer '10 and '11, I worked at
+[Noteflight](http://noteflight.com/), an online music score editing
+tool, as an intern and later a full developer. Not only is Noteflight
+an amazing company to work for, it's also the only score editor that
+isn't truly aggravating to use. I highly recommend it.
+
+I also made moogle, a fuzzy search engine for musical melodies. Type
+in a fragment of melody and Moogle will find the closest matches in
+its (meager) database, using an adaptated version of the BLAST
+protein-matching algorithm. Unfortunately, I haven't gotten around to
+finding decent hosting for the server (nobody wants to run my awful
+kludgy Java indexer), but you can find the code on
+[github](https://github.com/benskuhn/moogle) if you're curious. (This
+was a week-long independent project for school, so the code is pretty
+embarrassingly rushed, but something's better than nothing.)
+
+[hc-crimson]:http://www.thecrimson.com/article/2012/8/5/harvard-class-shopping-website/
+
+[hc-bostinno]:http://bostinno.com/2012/08/06/after-ucf-student-comes-under-attack-harvard-students-hack-the-course-selection-process/
+{% endmarkdown %}
+{% endblock %}
