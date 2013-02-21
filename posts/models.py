@@ -10,6 +10,8 @@ class Post(models.Model):
     title = models.CharField(max_length=300)
     text = models.TextField()
     excerpt = models.TextField()
+    def get_absolute_url(self):
+        return '/posts/' + self.slug
     def __unicode__(self):
         return self.title
 

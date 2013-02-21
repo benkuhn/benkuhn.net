@@ -13,12 +13,14 @@ I enjoy [making things](/projects/), reading, playing piano,
 dancing](http://en.wikipedia.org/wiki/Contra_dance), and various other
 strange activities.
 
-If you want to know Serious Things, I have a [resume]({{ STATIC_PREFIX }}resume.pdf). Or you can read some...
+If you want to know Serious Things, I have a
+[resume]({{STATIC_PREFIX}}resume.pdf). Or you can read some...
 
 ## Posts ##
 
 {% for post in posts %}
-### [{{ post.title }}]({{ post.url }}) ###
+### [{{ post.title }}]({{ post.get_absolute_url }}) ###
+{{ post.excerpt }}
 {% endfor %}
 
 {% endmarkdown %}
