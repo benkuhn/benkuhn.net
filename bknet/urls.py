@@ -12,6 +12,7 @@ pset = [
     url(r'^$', 'bknet.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^posts/', include(posts.urls)),
+    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
     ]
 for name in ['contact', 'projects', 'other']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
