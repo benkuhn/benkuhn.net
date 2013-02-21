@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load md %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<h2 class="post_title">{{ post.title }}</h2>
+<span class="info">&ndash; <span class="post_date"> on {{ post.datePosted|date:"l, F j, Y" }}</span></span>
+<div id="content">
+  {% markdown %}
+  {{ post.text }}
+  {% endmarkdown %}
+</div>
+{% comment %}
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'benkuhn';
+    var disqus_identifier = '{{ post.slug }}';
+    var disqus_title = '{{ post.title|escapejs }}';
+    // var disqus_url = '{{ post.url }}';
+    {% if debug %}
+    var disqus_developer = 1;
+    {% endif %}
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+{% endcomment %}
+{% endblock %}
