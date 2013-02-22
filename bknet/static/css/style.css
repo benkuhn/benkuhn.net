@@ -23,18 +23,23 @@ a:hover {
 a:visited {
     color:#108;
 }
-
+html {
+    margin: 0;
+}
 body {
     position:relative;
     width:640px;
-    margin:auto;
+    margin:0 auto;
     color:#222;
-    font: 1em georgia, serif;
+    font: 0.95em Georgia, serif;
+}
+p {
+    line-height:1.5em;
 }
 .aside {
     position:absolute;
-    left:-166px;
-    width: 166px;
+    left:-171px;
+    width: 161px;
 }
 #posts > p, * /*TODO fix*/ p + p {
     text-indent:0.25in;
@@ -57,5 +62,5 @@ img.me {
     margin-left:10px;
     margin-top:20px;
     margin-bottom:0px;
-    margin-right:15px;
+    margin-right:10px;
 }

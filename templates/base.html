@@ -8,6 +8,12 @@
     <title>{{ title }} | benkuhn.net</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
+    <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -28,13 +34,23 @@
       <div class="aside">
         <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
         <ul id="nav">
-          <li><a href="/">about</a></li>
+          <li><a href="/">home</a></li>
           <li><a href="/rss/">rss</a></li>
           <li><a href="/archive/1/">archive</a></li>
           <li><a href="/projects/">projects</a></li>
           <li><a href="/other/">other</a></li>
           <li><a href="/contact/">contact</a></li>
         </ul>
+{% markdown %}
+
+I study math and computer science at Harvard. When I'm not doing that,
+I enjoy [making things](/projects/),
+[coding](http://github.com/benskuhn/), reading, playing piano,
+[singing](http://www.harvardgleeclub.org/), [contra
+dancing](http://en.wikipedia.org/wiki/Contra_dance), and various other
+strange activities.
+
+{% endmarkdown %}
       </div>
       <h1>{{ title }}</h1>
       {% block content %}content goes here{% endblock %}
