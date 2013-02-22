@@ -12,14 +12,18 @@ def by_slug(request, slug=''):
         raise Http404
     if request.method == 'POST' and editable:
         form = PostForm()
-    return render_to_response('post.html', { 'post': post, 'editable':editable })
+    return render_to_response('post.html', { 'post': post,
+                                             'editable':editable,
+                                             'title':post.title })
 
 def tag(request, slug=''):
     tag = get_object_or_404(Tag, slug=slug)
     posts = Post.objects.filter(tags__slug=slug).prefetch_related('tags')
     if len(posts) == 0:
         raise Http404
-    return render_to_response('tag.html', { 'posts':posts, 'tag':tag })
+    return render_to_response('tag.html', { 'posts':posts,
+                                            'tag':tag,
+                                            'title':'posts tagged ' + tag.name })
 
 def archive():
     pass # stub
@@ -44,4 +48,5 @@ rss = RssFeed()
 @staff_member_required
 def queue(request):
     posts = Post.objects.filter(published=False)
-    return render_to_response('queue.html', { 'posts': posts })
+    return render_to_response('queue.html', { 'posts':posts,
+                                              'title':'queue'})

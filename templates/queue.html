@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load md %}
+{% block title %}Queue{% endblock %}
+{% block content %}
+
+{% markdown %}
+
+# Queue #
+
+{% for post in posts %}
+## [{{ post.title }}]({{ post.get_absolute_url }}) ##
+{{ post.excerpt }}
+{% endfor %}
+
+{% endmarkdown %}
+{% endblock %}

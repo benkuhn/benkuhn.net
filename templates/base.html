@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>{% block title %}base template{% endblock %} | benkuhn.net</title>
+    <title>{{ title }} | benkuhn.net</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
     <script type="text/javascript">
@@ -24,16 +24,19 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <div>
-      <h1>Ben Kuhn</h1>
-      <ul id="nav">
-        <li><a href="/">about</a></li>
-        <li><a href="/archive/0">archive</a></li>
-        <li><a href="/projects/">projects</a></li>
-        <li><a href="/other/">other</a></li>
-        <li><a href="/contact/">contact</a></li>
-      </ul>
-      <div id="main">{% block content %}content goes here{% endblock %}</div>
+    <div id="main">
+      <div class="aside">
+        <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
+        <ul id="nav">
+          <li><a href="/">about</a></li>
+          <li><a href="/archive/0">archive</a></li>
+          <li><a href="/projects/">projects</a></li>
+          <li><a href="/other/">other</a></li>
+          <li><a href="/contact/">contact</a></li>
+        </ul>
+      </div>
+      <h1>{{ title }}</h1>
+      {% block content %}content goes here{% endblock %}
     </div>
   </body>
 </html>

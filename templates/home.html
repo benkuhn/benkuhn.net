@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% load md %}
-{% block title %}Home{% endblock %}
 {% block content %}
 
 {% markdown %}
-
-<img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
 
 I study math and computer science at Harvard. When I'm not doing that,
 I enjoy [making things](/projects/), reading, playing piano,
@@ -20,8 +17,6 @@ If you want to know Serious Things, I have a
 
 <h1>Posts</h1>
 
-{% for post in posts %}
-{% include "post_snippet.html" %}
-{% endfor %}
+{% include "post_list.html" %}
 
 {% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load md %}
+{% block title %}posts tagged {{ tag.name }}{% endblock %}
+{% block content %}
+
+{% include "post_list.html" %}
+
+{% endblock %}
