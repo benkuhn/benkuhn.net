@@ -15,7 +15,8 @@ def by_slug(request, slug=''):
         form = PostForm()
     return render_to_response('post.html', { 'post': post,
                                              'editable':editable,
-                                             'title':post.title })
+                                             'title':post.title,
+                                             'mathjax':True })
 
 def tag(request, slug='', page=0):
     postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')
