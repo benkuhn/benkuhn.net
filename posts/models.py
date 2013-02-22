@@ -20,6 +20,10 @@ class Post(models.Model):
     excerpt = models.TextField()
     tags = models.ManyToManyField(Tag, related_name="posts")
     def get_absolute_url(self):
-        return '/' + self.slug
+        if self.published:
+            return '/' + self.slug
+        else:
+            print self.id
+            return '/admin/posts/post/' + str(self.id) + '/'
     def __unicode__(self):
         return self.title
