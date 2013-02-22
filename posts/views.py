@@ -18,7 +18,7 @@ def by_slug(request, slug=''):
 
 def tag(request, slug=''):
     tag = get_object_or_404(Tag, slug=slug)
-    posts = Post.objects.filter(tags__slug=slug).prefetch_related('tags')
+    posts = Post.objects.filter(published=True, tags__slug=slug).prefetch_related('tags')
     if len(posts) == 0:
         raise Http404
     return render_to_response('tag.html', { 'posts':posts,
