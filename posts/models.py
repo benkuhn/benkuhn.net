@@ -2,6 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+class Tag(models.Model):
+    name = models.CharField(max_length=300)
+    slug = models.SlugField()
+    def __unicode__(self):
+        return self.name
+    def get_absolute_url(self):
+        return '/tag/' + self.slug + '/1/'
+
 class Post(models.Model):
     datePosted = models.DateTimeField(null=True)
     lastUpdated = models.DateTimeField(auto_now=True)
@@ -10,16 +18,8 @@ class Post(models.Model):
     title = models.CharField(max_length=300)
     text = models.TextField()
     excerpt = models.TextField()
+    tags = models.ManyToManyField(Tag, related_name="posts")
     def get_absolute_url(self):
-        return '/posts/' + self.slug
+        return '/' + self.slug
     def __unicode__(self):
         return self.title
-
-class Tag(models.Model):
-    name = models.CharField(max_length=300)
-    slug = models.SlugField()
-    posts = models.ManyToManyField(Post, related_name="tags")
-    def __unicode__(self):
-        return self.name
-    def get_absolute_url(self):
-        return '/posts/tag/' + self.slug + '/1/'

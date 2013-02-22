@@ -1,10 +1,10 @@
 # Create your views here.
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from models import Post, Tag
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post.objects.prefetch_related('tags'), slug=slug)
@@ -57,5 +57,4 @@ rss = RssFeed()
 @staff_member_required
 def queue(request):
     posts = Post.objects.filter(published=False)
-    return render_to_response('queue.html', { 'posts':posts,
-                                              'title':'queue'})
+    return render(request, 'queue.html', { 'posts':posts, 'title':'queue' })
