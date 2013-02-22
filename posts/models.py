@@ -18,4 +18,8 @@ class Post(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=300)
     slug = models.SlugField()
-    posts = models.ManyToManyField(Post)
+    posts = models.ManyToManyField(Post, related_name="tags")
+    def __unicode__(self):
+        return self.name
+    def get_absolute_url(self):
+        return '/posts/tag/' + self.slug

@@ -16,12 +16,12 @@ strange activities.
 If you want to know Serious Things, I have a
 [resume]({{STATIC_PREFIX}}resume.pdf). Or you can read some...
 
-## Posts ##
+{% endmarkdown %}
+
+<h1>Posts</h1>
 
 {% for post in posts %}
-### [{{ post.title }}]({{ post.get_absolute_url }}) ###
-{{ post.excerpt }}
+{% include "post_snippet.html" %}
 {% endfor %}
 
-{% endmarkdown %}
 {% endblock %}
