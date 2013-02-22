@@ -44,7 +44,7 @@ class RssFeed(Feed):
     description_template = "rsspost.html"
 
     def items(self):
-        return Post.objects.order_by('-datePosted')[:10]
+        return Post.objects.filter(published=True).order_by('-datePosted')[:10]
 
     def item_title(self, post):
         return post.title
