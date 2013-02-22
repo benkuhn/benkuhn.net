@@ -4,6 +4,7 @@ from django.contrib.syndication.views import Feed
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
 from models import Post, Tag
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post.objects.prefetch_related('tags'), slug=slug)
@@ -16,17 +17,25 @@ def by_slug(request, slug=''):
                                              'editable':editable,
                                              'title':post.title })
 
-def tag(request, slug=''):
-    tag = get_object_or_404(Tag, slug=slug)
-    posts = Post.objects.filter(published=True, tags__slug=slug).prefetch_related('tags')
+def tag(request, slug='', page=0):
+    postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')
+    if page is None:
+        page = 1
+    if slug is None:
+        title = 'archive'
+    else:
+        tag = get_object_or_404(Tag, slug=slug)
+        title = 'posts tagged ' + tag.name
+        postList = postList.filter(tags__slug=slug)
+    paginator = Paginator(postList, 10)
+    posts = paginator.page(page)
     if len(posts) == 0:
         raise Http404
     return render_to_response('tag.html', { 'posts':posts,
-                                            'tag':tag,
-                                            'title':'posts tagged ' + tag.name })
+                                            'title':title })
 
-def archive():
-    pass # stub
+def archive(request, page=0):
+    return tag(request, slug=None, page=page)
 
 class RssFeed(Feed):
     title = "benkuhn.net"

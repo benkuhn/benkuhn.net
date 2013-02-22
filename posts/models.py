@@ -22,4 +22,4 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
     def get_absolute_url(self):
-        return '/posts/tag/' + self.slug
+        return '/posts/tag/' + self.slug + '/1/'
