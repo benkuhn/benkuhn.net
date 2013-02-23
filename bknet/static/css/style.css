@@ -94,20 +94,17 @@ li > p {
 #nav li:first-child:before {
     content: "";
 }
-.aside {
-    position:absolute;
-    left:-191px;
-    width: 156px;
-}
-.aside p {
+#aside p {
     text-indent:0;
 }
 img.me {
     /*float:left;*/
-    margin-left:10px;
+    display: block;
+    margin-left:auto;
     margin-top:25px;
     margin-bottom:0px;
-    margin-right:10px;
+    margin-right:auto;
+    box-shadow:0px 0px 6px 0px #666;
 }
 
 /* text */
@@ -168,8 +165,13 @@ html {
     color:#222;
     font: 16px 'Georgia', serif;
 }
+#aside {
+    float: left;
+    width: 168px;
+}
 #main {
-    position:relative;
+    float: right;
+    width: 560px;
 }
 #footer {
     width: 100%;
@@ -178,7 +180,10 @@ html {
     margin-top:30px;
     text-align: center;
 }
-.centerpage {
-    width: 560px;
+#wrap {
     margin: 0 auto;
+    padding-right: 2%;
+    width: 748px;
+}
+.centerpage {
 }

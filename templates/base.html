@@ -24,8 +24,8 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <div id="main" class="centerpage">
-      <div class="aside">
+    <div id="wrap">
+      <div id="aside">
         <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
         <ul id="nav">
           <li><a href="/">home</a></li>
@@ -46,15 +46,16 @@ strange activities.
 
 {% endmarkdown %}
       </div>
-      <h1 class="title">{{ title }}</h1>
-      {% block content %}content goes here{% endblock %}
-      <div id="footer">
-        <div class="centerpage">
+      <div id="main" class="centerpage">
+        <h1 class="title">{{ title }}</h1>
+        {% block content %}content goes here{% endblock %}
+        <div id="footer">
           benkuhn.net is built
           with <a href="https://www.djangoproject.com/">django</a>
           and <a href="http://www.webfaction.com?affiliate=benkuhn">webfaction</a>.
         </div>
       </div>
+      <br clear="all" />
     </div>
   </body>
 </html>
