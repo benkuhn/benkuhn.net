@@ -7,10 +7,9 @@
   <head>
     <title>{{ title }} | benkuhn.net</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
     <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    {% if mathjax %}
-    {% endif %}
     <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -27,7 +26,7 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <div id="main">
+    <div id="main" class="centerpage">
       <div class="aside">
         <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
         <ul id="nav">
@@ -49,8 +48,15 @@ strange activities.
 
 {% endmarkdown %}
       </div>
-      <h1>{{ title }}</h1>
+      <h1 class="title">{{ title }}</h1>
       {% block content %}content goes here{% endblock %}
+    </div>
+    <div id="footer">
+      <div class="centerpage">
+        benkuhn.net is built
+        with <a href="https://www.djangoproject.com/">django</a>
+        and <a href="http://www.webfaction.com?affiliate=benkuhn">webfaction</a>.
+      </div>
     </div>
   </body>
 </html>

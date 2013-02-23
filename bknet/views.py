@@ -6,10 +6,10 @@ def home(request):
     return render_to_response('home.html', { 'posts':posts, 'title':'Ben Kuhn' })
 
 def contact(request):
-    return render_to_response('contact.html', { 'title':'Contact' })
+    return render_to_response('contact.html', { 'title':'contact' })
 
 def projects(request):
-    return render_to_response('projects.html', { 'title': 'Projects' })
+    return render_to_response('projects.html', { 'title': 'projects' })
 
 def other(request):
-    return render_to_response('other.html', { 'title':'Other' })
+    return render_to_response('other.html', { 'title':'other' })
