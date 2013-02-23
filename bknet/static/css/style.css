@@ -99,7 +99,6 @@ html {
 }
 h1, h2 {
     font-weight: 600;
-    padding: 10px 0;
     margin:0 auto;
 /*    font-family: 'Open Sans';*/
 }
@@ -109,8 +108,10 @@ h1 {
 h2 {
     font-size: 22pt;
 }
-p {
+p, li {
     line-height: 24px;
+}
+p {
     margin:8px 0;
 }
 .aside {
@@ -123,15 +124,19 @@ p {
     text-indent: -0.25in;
     border-bottom: 1px solid #ccc;
     margin-bottom: 11px;
+    padding: 10px 0;
 }
 /*#posts > p, * p + */ p {
     text-indent:0.25in;
+}
+li > p {
+    text-indent:0;
 }
 .aside p {
     text-indent:0;
 }
 .post_title {
-    display:inline;
+    padding: 10px 0 0 0;
 }
 .info,.abccredit,.tags,#footer {
     color:#666;
@@ -149,4 +154,27 @@ img.me {
     margin-top:30px;
     margin-bottom:0px;
     margin-right:10px;
+}
+
+ol {
+    list-style: decimal;
+}
+ol ol {
+    list-style: lower-latin;
+}
+ol ol ol {
+    list-style: lower-roman;
+}
+
+ul {
+    list-style: disc;
+}
+ul ul {
+    list-style: circle;
+}
+ul ul ul {
+    list-style: square;
+}
+li {
+    margin-left:0.25in;
 }
