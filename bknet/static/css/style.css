@@ -97,7 +97,9 @@ li > p {
 .aside {
     position:absolute;
     left:-191px;
-    width: 161px;
+    width: 156px;
+    background: #fff;
+    padding: 0 5px;
 }
 .aside p {
     text-indent:0;

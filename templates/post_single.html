@@ -6,6 +6,9 @@
 {% endif %}
 <span class="info"></span>
 </h2>
+{% if not post.published %}
+<p><a href="{{ post.get_edit_url }}">(edit)</a></p>
+{% endif %}
 {% markdown %}
 {% if compact %}
 {{ post.excerpt }}
