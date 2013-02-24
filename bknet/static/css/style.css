@@ -78,9 +78,6 @@ li > p {
 
 /* side panel */
 #nav {
-    padding-left: 0;
-    padding-right: 10px;
-    padding-top: 10px;
     text-align: center;
     line-height: 20px;
 }
@@ -103,7 +100,7 @@ img.me {
     display: block;
     margin-left:auto;
     margin-top:25px;
-    margin-bottom:0px;
+    margin-bottom:15px;
     margin-right:auto;
     box-shadow:0px 0px 6px 0px #666;
 }
@@ -119,6 +116,12 @@ a:hover {
 a:visited {
     color:#108;
 }
+h2 a:hover {
+    text-decoration:none;
+}
+h2 a {
+    color: #222 !important;
+}
 h1, h2 {
     font-weight: 600;
     margin:0 auto;
@@ -129,7 +132,6 @@ h1 {
 }
 h2 {
     font-size: 22pt;
-    /*line-height: 33pt;*/
 }
 p, li {
     line-height: 24px;
@@ -152,7 +154,7 @@ div.abcrendered {
 }
 .title {
     margin-top:20px;
-    margin-bottom:-5px;
+    margin-bottom:-2px;
     text-align: center;
     text-indent: -0.25in;
 }
@@ -178,12 +180,18 @@ html {
 #footer {
     width: 100%;
     text-align: center;
+    padding-bottom: 25px;
 }
-.fancy_spacer {
+.spacer {
     background: #ccc;
     width: 100%;
     height: 1px;
+}
+.spacer.wide {
     margin: 25px 0;
+}
+.spacer.med {
+    margin: 10px 0;
 }
 
 #wrap {

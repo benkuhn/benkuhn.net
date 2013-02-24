@@ -27,6 +27,7 @@
     <div id="wrap">
       <div id="aside">
         <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
+        <div class="spacer med"></div>
         <ul id="nav">
           <li><a href="/">home</a></li>
           <li><a href="/rss/">rss</a></li>
@@ -35,6 +36,7 @@
           <li><a href="/other/">other</a></li>
           <li><a href="/contact/">contact</a></li>
         </ul>
+        <div class="spacer med"></div>
 {% markdown %}
 
 I study math and computer science at Harvard. When I'm not doing that,
@@ -48,9 +50,9 @@ strange activities.
       </div>
       <div id="main" class="centerpage">
         <h1 class="title">{{ title }}</h1>
-        <div class="fancy_spacer"></div>
+        <div class="spacer wide"></div>
         {% block content %}content goes here{% endblock %}
-        <div class="fancy_spacer"></div>
+        <div class="spacer wide"></div>
         <div id="footer">
           benkuhn.net is built
           with <a href="https://www.djangoproject.com/">django</a> and
