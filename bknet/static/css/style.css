@@ -145,6 +145,9 @@ p {
 .info,.abccredit,.tags,#footer {
     color:#666;
 }
+.tags {
+    text-indent: 0in;
+}
 .abccredit {
     font-style: italic;
     text-align: center;
