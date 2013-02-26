@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from models import Post, Tag
 from django.db.models import Q
+import md5
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post.objects.prefetch_related('tags'), slug=slug)
@@ -58,7 +59,7 @@ class RssFeed(Feed):
 
     item_guid_is_permalink = False
     def item_guid(self, post):
-        return md5.new(post.id).hexdigest()
+        return md5.new(str(post.id)).hexdigest()
 
     def item_categories(self, post):
         return [tag.name for tag in post.tags.all()]
