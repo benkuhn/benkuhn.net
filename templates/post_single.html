@@ -4,23 +4,23 @@
   <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
 </h2>
 {% endif %}
+</h2>
 <p class="tags">posted <span class="post_date"> on {{ post.datePosted|date:"l, F j, Y" }}</span> in
   {% for ptag in post.tags.all %}
   <a href="{{ ptag.get_absolute_url }}">{{ ptag.name }}</a>{% if not forloop.last %}, {% endif %}
   {% endfor %}
+  {% if user.is_authenticated and user.is_staff %}
+  <a href="{{ post.get_edit_url }}">(edit)</a>
+  {% endif %}
 </p>
-</h2>
-{% if not post.published %}
-<p><a href="{{ post.get_edit_url }}">(edit)</a></p>
-{% endif %}
 {% markdown %}
 {% if compact %}
-{{ post.excerpt }} [read more]({{ post.get_absolute_url }})
+{{ post.excerpt }} <a class="more" href="{{ post.get_absolute_url }}">read more</a>
 {% else %}
 {{ post.text }}
 {% endif %}
 {% endmarkdown %}
-{% if compact %}
+{% if not compact %}
 {% comment %}
 <div id="disqus_thread"></div>
 <script type="text/javascript">

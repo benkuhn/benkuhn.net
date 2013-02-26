@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
@@ -12,10 +12,10 @@ def by_slug(request, slug=''):
         raise Http404
     if request.method == 'POST' and editable:
         form = PostForm()
-    return render_to_response('post.html', { 'post': post,
-                                             'editable':editable,
-                                             'title':post.title,
-                                             'mathjax':True })
+    return render(request, 'post.html', { 'post': post,
+                                          'editable':editable,
+                                          'title':post.title,
+                                          'mathjax':True })
 
 def tag(request, slug='', page=0):
     postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')
@@ -31,26 +31,32 @@ def tag(request, slug='', page=0):
     posts = paginator.page(page)
     if len(posts) == 0:
         raise Http404
-    return render_to_response('tag.html', { 'posts':posts,
-                                            'title':title })
+    return render(request, 'tag.html', { 'posts':posts,
+                                         'title':title })
 
 def archive(request, page=0):
     return tag(request, slug=None, page=page)
 
 class RssFeed(Feed):
     title = "benkuhn.net"
-    link = "/posts/rss/"
+    link = "/archive/1/"
+    feed_url = "/rss/"
+    author_name = "Ben Kuhn"
     description = "New posts on benkuhn.net."
     description_template = "rsspost.html"
+    ttl = 5
 
     def items(self):
-        return Post.objects.filter(published=True).order_by('-datePosted')[:10]
+        return Post.objects.filter(published=True).prefetch_related('tags').order_by('-datePosted')[:10]
 
     def item_title(self, post):
         return post.title
 
     def item_description(self, post):
         return post.excerpt
+
+    def item_categories(self, post):
+        return [tag.name for tag in post.tags.all()]
 
 rss = RssFeed()
 

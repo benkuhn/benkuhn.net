@@ -27,37 +27,37 @@
     <div id="wrap">
       <div id="aside">
         <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
-        <div class="spacer med"></div>
-        <ul id="nav">
-          <li><a href="/">home</a></li>
-          <li><a href="/rss/">rss</a></li>
-          <li><a href="/archive/1/">archive</a></li>
-          <li><a href="/projects/">projects</a></li>
-          <li><a href="/other/">other</a></li>
-          <li><a href="/contact/">contact</a></li>
-        </ul>
-        <div class="spacer med"></div>
+        <hr class="med"></hr>
 {% markdown %}
 
-I study math and computer science at Harvard. When I'm not doing that,
-I enjoy [making things](/projects/),
+I'm Ben! I study math and computer science at Harvard. When I'm not
+doing that, I enjoy [making things](/projects/),
 [coding](http://github.com/benskuhn/), reading, playing piano,
 [singing](http://www.harvardgleeclub.org/), [contra
-dancing](http://en.wikipedia.org/wiki/Contra_dance), and various other
-strange activities.
+dancing](http://en.wikipedia.org/wiki/Contra_dance), hiking, and
+various other strange activities.
 
 {% endmarkdown %}
       </div>
       <div id="main" class="centerpage">
         <h1 class="title">{{ title }}</h1>
-        <div class="spacer wide"></div>
+        <hr class="wide"></hr>
         {% block content %}content goes here{% endblock %}
-        <div class="spacer wide"></div>
+        <hr class="wide"></hr>
         <div id="footer">
-          benkuhn.net is built
-          with <a href="https://www.djangoproject.com/">django</a> and
-          hosted
-          by <a href="http://www.webfaction.com?affiliate=benkuhn">webfaction</a>.
+          <ul id="nav">
+            <li><a href="/">home</a></li>
+            <li><a href="/projects/">projects</a></li>
+            <li><a href="/archive/1/">archive</a></li>
+            <li><a href="/rss/">rss</a></li>
+            <li><a href="/contact/">contact</a></li>
+          </ul>
+          <p>
+            benkuhn.net is built
+            with <a href="https://www.djangoproject.com/">django</a> and
+            hosted
+            by <a href="http://www.webfaction.com?affiliate=benkuhn">webfaction</a>.
+          </p>
         </div>
       </div>
       <br clear="all" />

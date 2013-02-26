@@ -3,6 +3,7 @@ from django.contrib import admin
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
+    filter_horizontal = ('tags',)
 
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
