@@ -28,9 +28,6 @@ ul ul ul {
 li {
     margin-left:0.25in;
 }
-li > p {
-    text-indent:0;
-}
 
 /* side panel */
 #nav {
@@ -50,9 +47,6 @@ li > p {
 }
 #nav li:first-child:before {
     content: "";
-}
-#aside p, #footer p {
-    text-indent:0;
 }
 img.me {
     /*float:left;*/
@@ -98,14 +92,23 @@ p, li {
 p {
     margin:8px 0;
 }
-p {
-    text-indent:8%;
+#main > p, .minipost > p {
+    text-indent:40px;
+}
+blockquote {
+    margin: 0;
+    margin-right: 40px;
+    margin-left: 5px;
+    border-left-width: 5px;
+    padding-left: 30px;
+    border-left-style: solid;
+    border-left-color:#ccc;
 }
 .info,.abccredit,.tags,#footer {
     color:#666;
 }
 .tags {
-    text-indent: 0in;
+    text-indent: 0in !important;
 }
 .abccredit {
     font-style: italic;

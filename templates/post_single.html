@@ -15,9 +15,9 @@
 </p>
 {% markdown %}
 {% if compact %}
-{{ post.excerpt }} <a class="more" href="{{ post.get_absolute_url }}">read more</a>
+{{ post.excerpt|safe }} [read more]({{ post.get_absolute_url }})
 {% else %}
-{{ post.text }}
+{{ post.text|safe }}
 {% endif %}
 {% endmarkdown %}
 {% if not compact %}
