@@ -69,5 +69,5 @@ rss = RssFeed()
 def queue(request):
     if not request.user.is_authenticated() and request.user.is_staff:
         raise Http404
-    posts = Post.objects.filter(published=False)
+    posts = Post.objects.extra(select={'length':'Length(text)'}).filter(published=False).order_by('-length')
     return render(request, 'queue.html', { 'posts':posts, 'title':'queue' })
