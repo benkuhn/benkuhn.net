@@ -5,7 +5,11 @@
 </h2>
 {% endif %}
 </h2>
-<p class="tags">posted <span class="post_date"> on {{ post.datePosted|date:"l, F j, Y" }}</span> in
+<p class="tags">
+  <span class="post_date">
+    on {{ post.datePosted|date:"l, F j, Y" }}
+    at {{ post.datePosted|date:"g:i a" }}
+  </span> in
   {% for ptag in post.tags.all %}
   <a href="{{ ptag.get_absolute_url }}">{{ ptag.name }}</a>{% if not forloop.last %}, {% endif %}
   {% endfor %}
@@ -13,6 +17,7 @@
   <a href="{{ post.get_edit_url }}">(edit)</a>
   {% endif %}
 </p>
+<div class="post">
 {% markdown %}
 {% if compact %}
 {{ post.excerpt|safe }} [read more]({{ post.get_absolute_url }})
@@ -20,24 +25,43 @@
 {{ post.text|safe }}
 {% endif %}
 {% endmarkdown %}
+</div>
 {% if not compact %}
-{% comment %}
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  var disqus_shortname = 'benkuhn';
-  var disqus_identifier = '{{ post.slug }}';
-  var disqus_title = '{{ post.title|escapejs }}';
-  // var disqus_url = '{{ post.url }}';
-  {% if debug %}
-  var disqus_developer = 1;
-  {% endif %}
-  (function() {
-  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-{% endcomment %}
+<p class="comment-intro">
+  <strong>
+    {% if not comments %}no{% else %}{{ comments|length }}{% endif %}
+    comment{{ comments|length|pluralize }}
+  </strong> &bull; <a class="clicky" onclick="javascript:var el = document.getElementById('comment-form'); if (el.style.display == 'block') el.style.display = 'none'; else el.style.display = 'block'">comment</a>
+</p>
+<div class="comments">
+<form id="comment-form" method="POST" action="{{ post.get_absolute_url }}" style="display:none;">
+  {% csrf_token %}
+  <div class="col2 left">
+    <input type="text" class="field" name="name" placeholder="name"></input>
+  </div>
+  <div class="col2 right">
+    <input type="text" class="field" name="email" placeholder="email"></input>
+  </div>
+  <textarea class="field" name="text" placeholder="comment"></textarea>
+  <a class="clicky submit right" onclick="javascript:document.getElementById('comment-form').submit()">submit</a><span class="submit info">format posts in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. email is used to make sure you're a human and get your <a href="http://gravatar.com/">gravatar</a>.</span>
+</form>
+{% for comment in comments %}
+  <div class="comment" id="comment-{{ comment.id }}">
+    <div class="comment-header">
+      <img class="avatar" src="{{ comment.email|gravatar }}?s=40"></img>
+      <!--div class="number">{{ forloop.counter }}.&nbsp;</div-->
+      <p class="name">{{ comment.name }}</p>
+      <p class="info">
+        on {{ comment.date|date:"l, F j" }}
+        at {{ comment.date|date:"g:i a" }}
+      </p>
+    </div>
+    <div class="comment-body">
+      {% usermarkdown %}
+{{ comment.text }}
+      {% endusermarkdown %}
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endif %}

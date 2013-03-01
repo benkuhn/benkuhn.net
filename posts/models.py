@@ -25,3 +25,12 @@ class Post(models.Model):
         return '/admin/posts/post/' + str(self.id) + '/'
     def __unicode__(self):
         return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='comments')
+    name = models.CharField(max_length=300)
+    email = models.CharField(max_length=300)
+    date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+    def get_absolute_url(self):
+        return self.post.get_absolute_url() + '#comment-' + self.id

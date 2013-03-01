@@ -3,21 +3,33 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
-from models import Post, Tag
+from models import Post, Tag, Comment
 from django.db.models import Q
 import md5
 
 def by_slug(request, slug=''):
-    post = get_object_or_404(Post.objects.prefetch_related('tags'), slug=slug)
+    q = Post.objects.prefetch_related('tags', 'comments')
+    post = get_object_or_404(q, slug=slug)
     editable = request.user.is_authenticated() and request.user.is_staff
     if not (post.published or editable):
         raise Http404
-    if request.method == 'POST' and editable:
-        form = PostForm()
+    if (request.method == 'POST'
+        and request.POST['name']
+        and request.POST['text']
+        and request.POST['email']):
+        comment = Comment()
+        comment.post = post
+        comment.name = request.POST['name']
+        comment.text = request.POST['text']
+        comment.email = request.POST['email']
+        comment.save()
+        post = get_object_or_404(q, slug=slug)
+    comments = post.comments.all().order_by('date')
     return render(request, 'post.html', { 'post': post,
                                           'editable':editable,
                                           'title':post.title,
-                                          'mathjax':True })
+                                          'mathjax':True,
+                                          'comments':comments })
 
 def tag(request, slug='', page=0):
     postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')

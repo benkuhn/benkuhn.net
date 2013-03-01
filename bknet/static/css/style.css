@@ -92,11 +92,10 @@ p, li {
 p {
     margin:8px 0;
 }
-#main > p, .minipost > p {
+.post > p, .comment-body > p {
     text-indent:40px;
 }
 blockquote {
-    margin: 0;
     margin-right: 40px;
     margin-left: 5px;
     border-left-width: 5px;
@@ -121,9 +120,8 @@ div.abcrendered {
     margin-top:20px;
     margin-bottom:-2px;
     text-align: center;
-    text-indent: -0.25in;
 }
-.minipost + .minipost {
+.post_title {
     margin-top: 20px;
 }
 
@@ -134,6 +132,7 @@ html {
     color:#222;
     font: 16px 'Georgia', serif;
 }
+* { box-sizing: border-box; }
 body {
     margin: 0;
 }
@@ -171,6 +170,76 @@ hr {
 
 #wrap {
     margin: 0 auto;
-    padding: 0 40px;
     width: 748px;
+}
+
+/* comments */
+input, textarea {
+    width: 100%;
+    font: inherit;
+}
+label {
+    float: left;
+    padding: 5px 20px 5px 0;
+}
+.col2 {
+    width: 49%;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+textarea {
+    height: 50px;
+    margin-top: 10px;
+}
+.submit {
+    padding: 5px 0;
+    display: block;
+}
+.clicky {
+    cursor: hand;
+    cursor: pointer;
+}
+form {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.field {
+    border: none; /*1px solid #ccc;*/
+    border-bottom: 1px solid #ccc;
+    padding: 3px;
+    display: table-cell;
+}
+.field:focus {
+    outline:none;
+}
+.name {
+    font-weight: bold;
+    /*font-variant: small-caps;
+    font-size: 18px;*/
+    color: #222;
+}
+.number {
+    float: left;
+    color: #999;
+    font-size: 40px;
+    margin: auto 0;
+}
+.avatar {
+    float: left;
+    margin: 5px;
+    margin-right: 7px;
+}
+.comment-header {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+.comment-header > p {
+    margin: 0;
+}
+.comments {
+    margin: 0 20px;
 }
