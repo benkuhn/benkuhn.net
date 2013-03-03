@@ -46,22 +46,7 @@
   <a class="clicky submit right" onclick="javascript:document.getElementById('comment-form').submit()">submit</a><span class="submit info">format posts in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. email is used to make sure you're a human and get your <a href="http://gravatar.com/">gravatar</a>.</span>
 </form>
 {% for comment in comments %}
-        <hr class="med"></hr>
-  <div class="comment" id="comment-{{ comment.id }}">
-    <div class="comment-header">
-      <img class="avatar" src="{{ comment.email|gravatar }}?s=40&d=identicon"></img>
-      <p class="name">{{ comment.name }}</p>
-      <p class="info">
-        on {{ comment.date|date:"l, F j" }}
-        at {{ comment.date|date:"g:i a" }}
-      </p>
-    </div>
-    <div class="comment-body">
-      {% usermarkdown %}
-{{ comment.text|safe }}
-      {% endusermarkdown %}
-    </div>
-  </div>
+{% include "comment_single.html" %}
 {% endfor %}
 </div>
 {% endif %}

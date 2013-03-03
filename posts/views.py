@@ -6,6 +6,7 @@ from django.http import Http404
 from models import Post, Tag, Comment
 from django.db.models import Q
 import md5
+from django.conf import settings
 
 def by_slug(request, slug=''):
     q = Post.objects.prefetch_related('tags', 'comments')
@@ -13,16 +14,8 @@ def by_slug(request, slug=''):
     editable = request.user.is_authenticated() and request.user.is_staff
     if not (post.published or editable):
         raise Http404
-    if (request.method == 'POST'
-        and request.POST['name']
-        and request.POST['text']
-        and request.POST['email']):
-        comment = Comment()
-        comment.post = post
-        comment.name = request.POST['name']
-        comment.text = request.POST['text']
-        comment.email = request.POST['email']
-        comment.save()
+    if (request.method == 'POST'):
+        do_comment(request, post, request.POST)
         post = get_object_or_404(q, slug=slug)
     comments = post.comments.all().order_by('date')
     return render(request, 'post.html', { 'post': post,
@@ -30,6 +23,43 @@ def by_slug(request, slug=''):
                                           'title':post.title,
                                           'mathjax':True,
                                           'comments':comments })
+
+def do_comment(request, post, attrs):
+    if not (attrs['name']
+            and attrs['text']
+            and attrs['email']):
+        return False
+    comment = Comment()
+    comment.post = post
+    comment.name = attrs['name']
+    comment.text = attrs['text']
+    comment.email = attrs['email']
+    comment.save()
+    akismet_check(request, comment)
+    return True
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+def akismet_check(request, comment):
+    params = {
+        'blog'                 : request.build_absolute_uri('/'),
+        'user_ip'              : get_client_ip(request),
+        'user_agent'           : request.META.get('HTTP_USER_AGENT'),
+        'referrer'             : request.META.get('HTTP_REFERER'),
+        'permalink'            : comment.post.get_absolute_url(),
+        'comment_type'         : 'comment',
+        'comment_author'       : comment.name,
+        'comment_author_email' : comment.email,
+        'comment_content'      : comment.text,
+        }
+    url = settings.AKISMET_KEY + '.rest.akismet.com/1.1/comment-check'
+    print params
 
 def tag(request, slug='', page=0):
     postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')

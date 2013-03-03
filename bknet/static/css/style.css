@@ -221,7 +221,7 @@ form {
     display: table-cell;
 }
 .field:focus {
-    outline:none;
+    outline: none;
 }
 .name {
     font-weight: bold;

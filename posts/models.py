@@ -32,5 +32,6 @@ class Comment(models.Model):
     email = models.CharField(max_length=300)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
+    spam = models.BooleanField()
     def get_absolute_url(self):
         return self.post.get_absolute_url() + '#comment-' + self.id
