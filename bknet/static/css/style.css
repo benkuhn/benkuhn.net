@@ -6,6 +6,10 @@
 
 /***** begin actual CSS ******/
 /* fix lists */
+ol, li {
+    padding:0;
+    margin-left:52px;/*keyed to p indent*/
+}
 ol {
     list-style: decimal;
 }
@@ -26,26 +30,26 @@ ul ul ul {
     list-style: square;
 }
 li {
-    margin-left:0.25in;
+    margin: 0;
 }
 
 /* side panel */
-#nav {
+.nav {
     text-align: center;
     line-height: 20px;
     margin: 0;
     padding: 0;
     text-align: center;
 }
-#nav li {
+.nav li {
     list-style: none;
     display: inline;
     margin: 0;
 }
-#nav li:before {
+.nav li:before {
     content: "~ ";
 }
-#nav li:first-child:before {
+.nav li:first-child:before {
     content: "";
 }
 img.me {
@@ -78,32 +82,32 @@ h2 a {
 h1, h2 {
     font-weight: 600;
     margin:0 auto;
+    line-height: 1em;
 }
 h1 {
     font-size: 30pt;
-    line-height: 1em;
 }
 h2 {
     font-size: 22pt;
 }
 p, li {
-    line-height: 24px;
+    line-height: 1.6em;
 }
 p {
     margin:8px 0;
 }
 .post > p, .comment-body > p {
-    text-indent:40px;
+    text-indent:52px; /* keyed to avatar padding */
 }
 blockquote {
     margin-right: 40px;
-    margin-left: 5px;
+    margin-left: 57px;
     border-left-width: 5px;
-    padding-left: 30px;
+    padding-left: 10px; /* keyed to avatar padding */
     border-left-style: solid;
     border-left-color:#ccc;
 }
-.info,.abccredit,.tags,#footer {
+.info,.abccredit,.tags,footer {
     color:#666;
 }
 .tags {
@@ -144,7 +148,7 @@ body {
     float: right;
     width: 560px;
 }
-#footer {
+footer {
     width: 100%;
     text-align: center;
     padding-bottom: 25px;
@@ -199,6 +203,9 @@ textarea {
     padding: 5px 0;
     display: block;
 }
+.submit.info {
+    width: 70%;
+}
 .clicky {
     cursor: hand;
     cursor: pointer;
@@ -230,16 +237,12 @@ form {
 }
 .avatar {
     float: left;
-    margin: 5px;
-    margin-right: 7px;
-}
-.comment-header {
-    padding: 5px 0;
-    border-bottom: 1px solid #ccc;
+    margin: 5px 9px 0px 3px;
+    box-shadow:0px 0px 4px 0px #666;
 }
 .comment-header > p {
     margin: 0;
 }
 .comments {
-    margin: 0 20px;
+    /*margin: 0 20px;*/
 }

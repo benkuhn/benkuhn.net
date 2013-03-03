@@ -20,7 +20,7 @@ class Cleaner(Treeprocessor):
 def do_markdown(parser, token):
     nodelist = parser.parse(('endmarkdown',))
     parser.delete_first_token()
-    return MarkdownNode(nodelist, safe=True)
+    return MarkdownNode(nodelist, safe=False)
 
 @register.tag(name='usermarkdown')
 def do_markdown(parser, token):

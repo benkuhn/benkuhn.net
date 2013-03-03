@@ -28,7 +28,7 @@
   <body>
     <div id="wrap">
       <div id="aside">
-        <img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
+        <a href="/"><img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img></a>
         <hr class="med"></hr>
 {% markdown %}
 
@@ -40,14 +40,23 @@ dancing](http://en.wikipedia.org/wiki/Contra_dance), hiking, and
 various other strange activities.
 
 {% endmarkdown %}
+        <hr class="med"></hr>
+        <div class="nav">
+          <div>
+            <a href="/">home</a> ~ <a href="/contact/">contact</a>
+          </div>
+          <div>
+            <a href="/archive/1/">archive</a> ~ <a href="/rss/">rss</a>
+          </div>
+        </div>
       </div>
       <div id="main" class="centerpage">
         <h1 class="title">{{ title }}</h1>
         <hr class="wide"></hr>
         {% block content %}content goes here{% endblock %}
         <hr class="wide"></hr>
-        <div id="footer">
-          <ul id="nav">
+        <footer>
+          <ul class="nav">
             <li><a href="/">home</a></li>
             <li><a href="/projects/">projects</a></li>
             <li><a href="/archive/1/">archive</a></li>
@@ -61,7 +70,7 @@ various other strange activities.
             by <a href="http://www.webfaction.com?affiliate=benkuhn">webfaction</a>.
           </p>
         </div>
-      </div>
+      </footer>
       <br clear="all" />
     </div>
   </body>
