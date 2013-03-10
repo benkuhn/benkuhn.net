@@ -18,7 +18,7 @@ pset = [
     url(r'^(?P<slug>[\w-]+)$', 'posts.views.by_slug'),
     url(r'^q/$', 'posts.views.queue'),
     ]
-for name in ['contact', 'projects', 'other']:
+for name in ['contact', 'projects']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
 
 urlpatterns = patterns('', *pset
