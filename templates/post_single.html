@@ -29,7 +29,7 @@
 {% if not compact %}
 <p class="comment-intro">
   <strong>
-    {% if not comments %}no{% else %}{{ comments|length }}{% endif %}
+    {% if not comment_count %}no{% else %}{{ comment_count }}{% endif %}
     comment{{ comments|length|pluralize }}
   </strong> &bull; <a class="clicky" onclick="javascript:var el = document.getElementById('comment-form'); if (el.style.display == 'block') el.style.display = 'none'; else el.style.display = 'block'">comment</a>
 </p>

@@ -28,7 +28,7 @@ def do_markdown(parser, token):
     parser.delete_first_token()
     return MarkdownNode(nodelist, safe=True)
 
-@register.filter
+@register.filter(name='gravatar')
 def gravatar(string):
     param = md5.md5(string).hexdigest()
     return 'http://www.gravatar.com/avatar/' + param

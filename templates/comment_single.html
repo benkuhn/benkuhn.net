@@ -1,3 +1,6 @@
+{% load md %}
+{% if comment.spam and not user.is_staff %}
+{% else %}
 <hr class="med"></hr>
 <div class="comment" id="comment-{{ comment.id }}">
   <div class="comment-header">
@@ -14,3 +17,4 @@
     {% endusermarkdown %}
   </div>
 </div>
+{% endif %}

@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from models import Post, Tag, Comment
 from django.db.models import Q
-import md5
+import md5, urllib, urllib2
 from django.conf import settings
 
 def by_slug(request, slug=''):
@@ -18,11 +18,13 @@ def by_slug(request, slug=''):
         do_comment(request, post, request.POST)
         post = get_object_or_404(q, slug=slug)
     comments = post.comments.all().order_by('date')
+    comment_count = len([comment for comment in comments if not comment.spam])
     return render(request, 'post.html', { 'post': post,
                                           'editable':editable,
                                           'title':post.title,
                                           'mathjax':True,
-                                          'comments':comments })
+                                          'comments':comments,
+                                          'comment_count':comment_count})
 
 def do_comment(request, post, attrs):
     if not (attrs['name']
@@ -34,9 +36,8 @@ def do_comment(request, post, attrs):
     comment.name = attrs['name']
     comment.text = attrs['text']
     comment.email = attrs['email']
+    comment.spam = akismet_check(request, comment)
     comment.save()
-    akismet_check(request, comment)
-    return True
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -58,8 +59,12 @@ def akismet_check(request, comment):
         'comment_author_email' : comment.email,
         'comment_content'      : comment.text,
         }
-    url = settings.AKISMET_KEY + '.rest.akismet.com/1.1/comment-check'
-    print params
+    url = 'http://' + settings.AKISMET_KEY + '.rest.akismet.com/1.1/comment-check'
+    r = urllib2.urlopen(url, data=urllib.urlencode(params)).read()
+    if 'true' == r:
+        return True
+    else:
+        return False
 
 def tag(request, slug='', page=0):
     postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')
