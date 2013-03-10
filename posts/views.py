@@ -27,9 +27,9 @@ def by_slug(request, slug=''):
                                           'comment_count':comment_count})
 
 def do_comment(request, post, attrs):
-    if not (attrs['name']
-            and attrs['text']
-            and attrs['email']):
+    if not ('name' in attrs
+            and 'text' in attrs
+            and 'email' in attrs):
         return False
     comment = Comment()
     comment.post = post
