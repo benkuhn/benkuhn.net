@@ -73,14 +73,11 @@ a:hover {
 a:visited {
     color:#108;
 }
-h2 a:hover {
-    text-decoration:none;
-}
 h2 a {
     color: #222 !important;
 }
 h1, h2 {
-    font-weight: 600;
+    font-weight: 400;
     margin:0 auto;
     line-height: 1em;
 }
