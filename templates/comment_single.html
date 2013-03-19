@@ -5,7 +5,7 @@
 <div class="comment" id="comment-{{ comment.id }}">
   <div class="comment-header">
     <img class="avatar" src="{{ comment.email|gravatar }}?s=40&d=identicon"></img>
-    <p class="name">{{ comment.name }}</p>
+    <p class="name">{{ comment.name }} {% if comment.spam %}<span class="spam">(spam)</span>{% endif %}</p>
     <p class="info">
       on {{ comment.date|date:"l, F j" }}
       at {{ comment.date|date:"g:i a" }}

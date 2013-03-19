@@ -207,6 +207,10 @@ textarea {
     cursor: hand;
     cursor: pointer;
 }
+.spam {
+    color: #f00;
+    font-weight: normal;
+}
 form {
     width: 100%;
     margin-bottom: 10px;
