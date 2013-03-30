@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Not found{% endblock %}
-{% block content %}
-<h1>Not found</h1>
-The link you requested could not be found. Sorry if I broke it.
-{% endblock %}
+{% with "Not found" as title %}
+{% include "404_inner.html" %}
+{% endwith %}
