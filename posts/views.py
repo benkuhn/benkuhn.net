@@ -71,6 +71,11 @@ def do_comment(request, post, attrs, all_comments=None):
         msg.content_subtype = 'html'
         msg.send()
 
+def unsub(request, slug='', email=''):
+    post = get_object_or_404(Post, slug=slug)
+    comments = post.comments.filter(email=email).update(subscribed=False)
+    return render(request, 'unsub.html', { 'title':'farewell' })
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:

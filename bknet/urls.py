@@ -17,6 +17,7 @@ pset = [
     url(r'^archive/(?P<page>\d+)/$', 'posts.views.archive'),
     url(r'^(?P<slug>[\w-]+)$', 'posts.views.by_slug'),
     url(r'^q/$', 'posts.views.queue'),
+    url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub')
     ]
 for name in ['contact', 'projects']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
