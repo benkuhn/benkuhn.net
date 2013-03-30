@@ -2,6 +2,7 @@ from django import template
 import markdown
 import md5
 from markdown.treeprocessors import Treeprocessor
+from markdown.inlinepatterns import Pattern
 from markdown.extensions import Extension
 
 register = template.Library()
@@ -15,6 +16,16 @@ class Cleaner(Treeprocessor):
     def run(self, root):
         for a in root.findall('.//a'):
             a.attrib['rel'] = 'nofollow'
+
+class Texer(Extension):
+    def extendMarkdown(self, md, md_globals):
+        md.inlinePatterns['texer'] = TeXPattern()
+
+class TeXPattern(Pattern):
+    def __init__(self):
+        Pattern.__init__(self, r'\$(?P<math>[^\s](.*[^\s]))\$')
+    def handleMatch(self, m):
+        return r'\(' + m.group('math') + r'\)'
 
 @register.tag(name='markdown')
 def do_markdown(parser, token):
@@ -34,7 +45,7 @@ def gravatar(string):
     return 'http://www.gravatar.com/avatar/' + param
 
 unsafe_parser = markdown.Markdown(extensions=['footnotes', 'smartypants'])
-safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow()])
+safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow(), Texer()])
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):
         self.nodelist = nodelist
