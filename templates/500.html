@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Server error{% endblock %}
-{% block content %}
-<h1>Server error</h1>
-You have encountered an error. Please try again later.
-{% endblock %}
+{% with "Server error" as title %}
+{% include "500_inner.html" %}
+{% endwith %}
