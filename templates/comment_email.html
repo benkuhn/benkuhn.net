@@ -1,0 +1,16 @@
+{% load md %}<p>Hi {{ name }}!</p>
+
+<p> This is just to let you know that {{ comment.name }} replied to
+the discussion of <a href="http://www.benkuhn.net{{
+comment.post.get_absolute_url}}">"{{ comment.post.title
+}}"</a>. Here's what they said:
+</p>
+
+<blockquote>
+    {% usermarkdown %}
+    {{ comment.text|safe }}
+    {% endusermarkdown %}
+</blockquote>
+
+<p>If you don't want to receive these emails anymore, you
+can <a href="http://www.benkuhn.net/unsubscribe?post={{comment.post.slug}}&email={{email|urlencode}}">unsubscribe</a>.</p>
