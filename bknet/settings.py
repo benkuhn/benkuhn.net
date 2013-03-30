@@ -102,9 +102,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+INTERNAL_IPS = ()
+
+def show_tb(request):
+    return request.user.is_authenticated() and request.user.is_staff
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS':False,
+    'SHOW_TOOLBAR_CALLBACK':show_tb
+    }
 
 ROOT_URLCONF = 'bknet.urls'
 
@@ -131,6 +142,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'bknet',
     'posts',
+    'debug_toolbar'
 )
 
 # A sample logging configuration. The only tangible logging

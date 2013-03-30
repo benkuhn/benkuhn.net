@@ -9,8 +9,7 @@ import md5, urllib, urllib2
 from django.conf import settings
 
 def by_slug(request, slug=''):
-    q = Post.objects.prefetch_related('tags', 'comments')
-    post = get_object_or_404(q, slug=slug)
+    post = get_object_or_404(Post, slug=slug)
     editable = request.user.is_authenticated() and request.user.is_staff
     if not (post.published or editable):
         raise Http404
