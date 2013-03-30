@@ -6,7 +6,7 @@
 
 /***** begin actual CSS ******/
 /* fix lists */
-ol, li {
+ol, ul, li {
     padding:0;
     margin-left:52px;/*keyed to p indent*/
 }

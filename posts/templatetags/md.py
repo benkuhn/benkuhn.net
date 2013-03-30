@@ -33,7 +33,7 @@ def gravatar(string):
     param = md5.md5(string).hexdigest()
     return 'http://www.gravatar.com/avatar/' + param
 
-unsafe_parser = markdown.Markdown(safe_mode='escape', extensions=['footnotes', 'smartypants'])
+unsafe_parser = markdown.Markdown(extensions=['footnotes', 'smartypants'])
 safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow()])
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):
