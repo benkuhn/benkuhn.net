@@ -11,6 +11,7 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     ('Ben Kuhn', 'ben.s.kuhn@gmail.com'),
 )
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MANAGERS = ADMINS
 

@@ -175,7 +175,7 @@ hr {
 }
 
 /* comments */
-input, textarea {
+input[type="text"], textarea {
     width: 100%;
     font: inherit;
 }

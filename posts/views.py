@@ -7,16 +7,21 @@ from models import Post, Tag, Comment
 from django.db.models import Q
 import md5, urllib, urllib2
 from django.conf import settings
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.template.loader import get_template
+from django.template import Context
+from django.core.mail import send_mail
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
     editable = request.user.is_authenticated() and request.user.is_staff
     if not (post.published or editable):
         raise Http404
-    if (request.method == 'POST'):
-        do_comment(request, post, request.POST)
-        post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by('date')
+    if (request.method == 'POST'):
+        do_comment(request, post, request.POST, comments)
+        post = get_object_or_404(Post, slug=slug)
     comment_count = len([comment for comment in comments if not comment.spam])
     return render(request, 'post.html', { 'post': post,
                                           'editable':editable,
@@ -25,18 +30,44 @@ def by_slug(request, slug=''):
                                           'comments':comments,
                                           'comment_count':comment_count})
 
-def do_comment(request, post, attrs):
+def isLegitEmail(email):
+    return True
+    try:
+        validate_email(email)
+        return True
+    except ValidationError:
+        return False
+
+def do_comment(request, post, attrs, all_comments=None):
     if not ('name' in attrs
             and 'text' in attrs
             and 'email' in attrs):
         return False
+    if not all_comments:
+        all_comments = post.comments.all()
     comment = Comment()
     comment.post = post
     comment.name = attrs['name']
     comment.text = attrs['text']
     comment.email = attrs['email']
     comment.spam = akismet_check(request, comment)
+    comment.subscribed = attrs.get('subscribed', False)
     comment.save()
+    if comment.spam:
+        return # don't email people for spam comments!
+    emails = {}
+    for c in all_comments:
+        if c.subscribed and c.email != comment.email and isLegitEmail(c.email):
+            emails[c.email] = c.name
+    template = get_template('comment_email.html')
+    subject = "Someone replied to your comment"
+    for email, name in emails.iteritems():
+        text = template.render(Context({
+                    'comment':comment,
+                    'email':email,
+                    'name':name
+                    }))
+        send_mail(subject, text, "robot@benkuhn.net", [email])
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

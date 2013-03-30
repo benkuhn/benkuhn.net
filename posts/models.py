@@ -33,6 +33,7 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     spam = models.BooleanField()
+    subscribed = models.BooleanField()
     def get_absolute_url(self):
         return self.post.get_absolute_url() + '#comment-' + self.id
     def __unicode__(self):

@@ -43,7 +43,17 @@
     <input type="text" class="field" name="email" placeholder="email"></input>
   </div>
   <textarea class="field" name="text" placeholder="comment"></textarea>
-  <a class="clicky submit right" onclick="javascript:document.getElementById('comment-form').submit()">submit</a><span class="submit info">format posts in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. put TeX math between $ signs without spaces around the edges. email is used to make sure you're a human and get your <a href="http://gravatar.com/">gravatar</a>.</span>
+  <div class="right submit">
+    <input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input>
+    <span class="info">follow</span><br/><br/>
+    <a class="right clicky"
+    onclick="javascript:document.getElementById('comment-form').submit()">submit</a>
+  </div>
+  <span class="submit info">format posts
+  in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. put
+  TeX math between $ signs without spaces around the edges. email is
+  used to make sure you're a human and get
+  your <a href="http://gravatar.com/">gravatar</a>.</span>
 </form>
 {% for comment in comments %}
 {% include "comment_single.html" %}
