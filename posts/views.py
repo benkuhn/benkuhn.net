@@ -11,7 +11,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.template.loader import get_template
 from django.template import Context
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
@@ -67,7 +67,9 @@ def do_comment(request, post, attrs, all_comments=None):
                     'email':email,
                     'name':name
                     }))
-        send_mail(subject, text, "robot@benkuhn.net", [email])
+        msg = EmailMessage(subject, text, "robot@benkuhn.net", [email])
+        msg.content_subtype = 'html'
+        msg.send()
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
