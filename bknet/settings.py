@@ -87,7 +87,10 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
+# P.S. This is not the key used in production. I'm not that dumb.
 SECRET_KEY = 'a7gvibhm*jn4m^2yr_#tl^nin#54oz698yj*zwinylht%^um0j'
+
+AKISMET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

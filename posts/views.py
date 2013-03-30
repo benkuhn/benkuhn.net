@@ -15,7 +15,7 @@ def by_slug(request, slug=''):
         raise Http404
     if (request.method == 'POST'):
         do_comment(request, post, request.POST)
-        post = get_object_or_404(q, slug=slug)
+        post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by('date')
     comment_count = len([comment for comment in comments if not comment.spam])
     return render(request, 'post.html', { 'post': post,
@@ -47,6 +47,8 @@ def get_client_ip(request):
     return ip
 
 def akismet_check(request, comment):
+    if settings.AKISMET_KEY == '':
+        return comment.name == 'viagra-test-123'
     params = {
         'blog'                 : request.build_absolute_uri('/'),
         'user_ip'              : get_client_ip(request),
