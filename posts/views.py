@@ -18,7 +18,7 @@ def by_slug(request, slug=''):
     editable = request.user.is_authenticated() and request.user.is_staff
     if not (post.published or editable):
         raise Http404
-    comments = post.comments.all().order_by('date')
+    comments = list(post.comments.all().order_by('date'))
     if (request.method == 'POST'):
         do_comment(request, post, request.POST, comments)
         post = get_object_or_404(Post, slug=slug)
@@ -53,6 +53,7 @@ def do_comment(request, post, attrs, all_comments=None):
     comment.spam = akismet_check(request, comment)
     comment.subscribed = attrs.get('subscribed', False)
     comment.save()
+    all_comments.append(comment)
     if comment.spam:
         return # don't email people for spam comments!
     emails = {}
