@@ -2,7 +2,7 @@ from django.shortcuts import render
 from posts.models import Post, Tag
 
 def home(request):
-    posts = Post.objects.filter(published=True).order_by('-datePosted')[:5]
+    posts = Post.objects.filter(published=True).order_by('-datePosted')[:10]
     return render(request, 'home.html', { 'posts':posts, 'title':'Ben Kuhn' })
 
 def contact(request):
