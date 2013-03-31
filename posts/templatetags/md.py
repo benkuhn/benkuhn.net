@@ -23,7 +23,7 @@ class Texer(Extension):
 
 class TeXPattern(Pattern):
     def __init__(self, markdown):
-        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$', markdown_instance=markdown)
+        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$(?=[^\$])', markdown_instance=markdown)
     def handleMatch(self, m):
         return r'\(' + self.unescape(m.group('math')) + r'\)'
 
