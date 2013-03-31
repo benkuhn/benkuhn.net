@@ -19,13 +19,13 @@ class Cleaner(Treeprocessor):
 
 class Texer(Extension):
     def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['texer'] = TeXPattern()
+        md.inlinePatterns['texer'] = TeXPattern(md)
 
 class TeXPattern(Pattern):
-    def __init__(self):
-        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$')
+    def __init__(self, markdown):
+        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$', markdown_instance=markdown)
     def handleMatch(self, m):
-        return r'\(' + m.group('math') + r'\)'
+        return r'\(' + self.unescape(m.group('math')) + r'\)'
 
 @register.tag(name='markdown')
 def do_markdown(parser, token):
@@ -44,7 +44,7 @@ def gravatar(string):
     param = md5.md5(string).hexdigest()
     return 'http://www.gravatar.com/avatar/' + param
 
-unsafe_parser = markdown.Markdown(extensions=['footnotes', 'smartypants', Texer()])
+unsafe_parser = markdown.Markdown(extensions=[Texer(), 'footnotes', 'smartypants'])
 safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow(), Texer()])
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):
