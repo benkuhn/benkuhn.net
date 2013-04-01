@@ -20,7 +20,7 @@ def by_slug(request, slug=''):
         raise Http404
     comments = list(post.comments.all().order_by('date'))
     if (request.method == 'POST'):
-        do_comment(request, post, request.POST, comments)
+        do_comment(request, post, request.POST, all_comments=comments)
         post = get_object_or_404(Post, slug=slug)
     comment_count = len([comment for comment in comments if not comment.spam])
     return render(request, 'post.html', { 'post': post,
@@ -43,8 +43,8 @@ def do_comment(request, post, attrs, all_comments=None):
             and 'text' in attrs
             and 'email' in attrs):
         return False
-    if not all_comments:
-        all_comments = post.comments.all()
+    if all_comments is None:
+        all_comments = list(post.comments.all())
     comment = Comment()
     comment.post = post
     comment.name = attrs['name']
