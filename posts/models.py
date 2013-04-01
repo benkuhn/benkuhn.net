@@ -8,7 +8,7 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
     def get_absolute_url(self):
-        return '/tag/' + self.slug + '/1/'
+        return '/tag/' + self.slug + '/0/'
 
 class Post(models.Model):
     datePosted = models.DateTimeField(null=True)

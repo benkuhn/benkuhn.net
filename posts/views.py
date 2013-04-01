@@ -117,7 +117,7 @@ def tag(request, slug='', page=0):
         title = 'posts tagged ' + tag.name
         postList = postList.filter(tags__slug=slug)
     paginator = Paginator(postList, 10)
-    posts = paginator.page(page)
+    posts = paginator.page(int(page)+1)
     if len(posts) == 0:
         raise Http404
     return render(request, 'tag.html', { 'posts':posts,
@@ -128,7 +128,7 @@ def archive(request, page=0):
 
 class RssFeed(Feed):
     title = "benkuhn.net"
-    link = "/archive/1/"
+    link = "/"
     feed_url = "/rss/"
     author_name = "Ben Kuhn"
     description = "New posts on benkuhn.net."
