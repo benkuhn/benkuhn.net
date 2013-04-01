@@ -19,7 +19,17 @@ class Cleaner(Treeprocessor):
 
 class Texer(Extension):
     def extendMarkdown(self, md, md_globals):
+        md.inlinePatterns['fixer'] = BackslashFixer(md)
         md.inlinePatterns['texer'] = TeXPattern(md)
+
+class BackslashFixer(Pattern):
+    def __init__(self, markdown):
+        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$', markdown_instance=markdown)
+    def handleMatch(self, m):
+        # please kill me now
+        s = self.unescape(m.group('math')).replace("\0292\03", '\\\\\\\\')
+        print s
+        return r'$%s$' % s
 
 class TeXPattern(Pattern):
     def __init__(self, markdown):
