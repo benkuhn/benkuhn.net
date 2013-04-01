@@ -19,20 +19,16 @@ class Cleaner(Treeprocessor):
 
 class Texer(Extension):
     def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['displayMath'] = DisplayMath(md)
         md.inlinePatterns['inlineMath'] = InlineMath(md)
 
 class InlineMath(Pattern):
     def __init__(self, markdown):
-        Pattern.__init__(self, r'\$(?P<math>[^\s](.*?[^\s])??)\$', markdown_instance=markdown)
+        Pattern.__init__(self, r'((?P<display>\$\$[^\s](.*?[^\s])??\$\$)|\$(?P<inline>[^\s](.*?[^\s])??)\$)', markdown_instance=markdown)
     def handleMatch(self, m):
-        return r'\(' + self.unescape(m.group('math')).replace("\0292\03", '\\\\\\\\') + r'\)'
-
-class DisplayMath(Pattern):
-    def __init__(self, markdown):
-        Pattern.__init__(self, r'\$\$[^\s](.*?[^\s])??\$\$', markdown_instance=markdown)
-    def handleMatch(self, m):
-        return self.unescape(m.group()).replace("\0292\03", '\\\\\\\\')
+        if m.group('inline'):
+            return r'\(' + self.unescape(m.group('inline')).replace("\0292\03", '\\\\\\\\') + r'\)'
+        else:
+            return self.unescape(m.group('display')).replace("\0292\03", '\\\\\\\\')
 
 @register.tag(name='markdown')
 def do_markdown(parser, token):
