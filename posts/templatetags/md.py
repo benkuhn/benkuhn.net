@@ -1,6 +1,6 @@
 from django import template
 import markdown
-import md5
+import md5, re
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import Pattern
 from markdown.extensions import Extension
@@ -43,6 +43,12 @@ def do_markdown(parser, token):
 def gravatar(string):
     param = md5.md5(string).hexdigest()
     return 'http://www.gravatar.com/avatar/' + param
+
+stripper = re.compile(r'<.*?>')
+@register.filter(name='stripmd')
+def stripmd(string):
+    tmp = unsafe_parser.reset().convert(string)
+    return stripper.sub('', tmp)
 
 unsafe_parser = markdown.Markdown(extensions=[Texer(), 'footnotes', 'smartypants'])
 safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow(), Texer()])
