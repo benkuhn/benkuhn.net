@@ -16,7 +16,7 @@ from django.core.mail import EmailMessage
 def by_slug(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
     editable = request.user.is_authenticated() and request.user.is_staff
-    if not (post.published or editable):
+    if post.state == Post.HIDDEN and not editable:
         raise Http404
     comments = list(post.comments.all().order_by('date'))
     if (request.method == 'POST'):
@@ -107,7 +107,7 @@ def akismet_check(request, comment):
         return False
 
 def tag(request, slug='', page=0):
-    postList = Post.objects.prefetch_related('tags').filter(published=True).order_by('-datePosted')
+    postList = Post.objects.prefetch_related('tags').filter(state=Post.PUBLISHED).order_by('-datePosted')
     if page is None:
         page = 1
     if slug is None:
@@ -136,7 +136,7 @@ class RssFeed(Feed):
     ttl = 5
 
     def items(self):
-        return Post.objects.filter(published=True).prefetch_related('tags').order_by('-datePosted')[:10]
+        return Post.objects.filter(state=Post.PUBLISHED).prefetch_related('tags').order_by('-datePosted')[:10]
 
     def item_title(self, post):
         return post.title
@@ -156,5 +156,5 @@ rss = RssFeed()
 def queue(request):
     if not request.user.is_authenticated() and request.user.is_staff:
         raise Http404
-    posts = Post.objects.extra(select={'length':'Length(text)'}).filter(published=False).order_by('-length')
+    posts = Post.objects.extra(select={'length':'Length(text)'}).filter(state__ne=Post.PUBLISHED).order_by('-length')
     return render(request, 'queue.html', { 'posts':posts, 'title':'queue' })

@@ -11,9 +11,17 @@ class Tag(models.Model):
         return '/tag/' + self.slug + '/0/'
 
 class Post(models.Model):
+    HIDDEN = 0
+    PREVIEW = 1
+    PUBLISHED = 2
+    STATES = (
+        (HIDDEN, 'Hidden'),
+        (PREVIEW, 'Preview'),
+        (PUBLISHED, 'Published'),
+        )
     datePosted = models.DateTimeField(null=True)
     lastUpdated = models.DateTimeField(auto_now=True)
-    published = models.BooleanField()
+    state = models.IntegerField(choices=STATES)
     slug = models.SlugField()
     title = models.CharField(max_length=300)
     text = models.TextField()
