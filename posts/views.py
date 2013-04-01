@@ -106,25 +106,26 @@ def akismet_check(request, comment):
     else:
         return False
 
-def tag(request, slug='', page=0):
+def tag(request, slug='', page=0, title=''):
     postList = Post.objects.prefetch_related('tags').filter(state=Post.PUBLISHED).order_by('-datePosted')
     if page is None:
         page = 1
-    if slug is None:
-        title = 'archive'
-    else:
+    if slug is not None:
         tag = get_object_or_404(Tag, slug=slug)
         title = 'posts tagged ' + tag.name
         postList = postList.filter(tags__slug=slug)
     paginator = Paginator(postList, 10)
-    posts = paginator.page(int(page)+1)
+    page = int(page) + 1
+    if page > paginator.num_pages:
+        raise Http404
+    posts = paginator.page(page)
     if len(posts) == 0:
         raise Http404
     return render(request, 'tag.html', { 'posts':posts,
                                          'title':title })
 
 def archive(request, page=0):
-    return tag(request, slug=None, page=page)
+    return tag(request, slug=None, page=page, title='archive')
 
 class RssFeed(Feed):
     title = "benkuhn.net"

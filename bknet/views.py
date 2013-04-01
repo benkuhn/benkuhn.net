@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from posts.models import Post, Tag
+from posts.views import tag
 
 def home(request):
-    posts = Post.objects.filter(state=Post.PUBLISHED).order_by('-datePosted')[:10]
-    return render(request, 'home.html', { 'posts':posts, 'title':'Ben Kuhn' })
+    return tag(request, slug=None, page=0, title='Ben Kuhn')
 
 def contact(request):
     return render(request, 'contact.html', { 'title':'contact' })
