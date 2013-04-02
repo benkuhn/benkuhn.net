@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from models import Post, Tag, Comment
 from django.db.models import Q
-import md5, urllib, urllib2
+import md5, urllib, urllib2, hashlib
 from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -46,11 +46,18 @@ def do_comment(request, post, attrs, all_comments=None):
         all_comments = list(post.comments.all())
     comment = Comment()
     comment.post = post
-    comment.name = attrs['name']
+    comment.name = attrs['name'].strip()
+    if len(comment.name) == 0:
+        comment.name = 'Anonymous'
     comment.text = attrs['text']
     comment.email = attrs['email']
     comment.spam = akismet_check(request, comment)
-    comment.subscribed = attrs.get('subscribed', False)
+    if isLegitEmail(comment.email):
+        comment.subscribed = attrs.get('subscribed', False)
+    else:
+        comment.subscribed = False
+        # make sure same ip has consistent gravatar
+        comment.email = hashlib.sha1(comment.text).hexdigest()
     comment.save()
     all_comments.append(comment)
     if comment.spam:
