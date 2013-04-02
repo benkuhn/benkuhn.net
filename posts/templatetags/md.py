@@ -23,7 +23,7 @@ class Texer(Extension):
 
 class InlineMath(Pattern):
     def __init__(self, markdown):
-        Pattern.__init__(self, r'((?P<display>\$\$[^\s](.*?[^\s])??\$\$)|\$(?P<inline>[^\s](.*?[^\s])??)\$)', markdown_instance=markdown)
+        Pattern.__init__(self, r'((?P<display>\$\$[^\s](.*?[^\s])??\$\$)|\$(?P<inline>[^\s](.*?[^\s])??)\$(?=[^\d]|$))', markdown_instance=markdown)
     def handleMatch(self, m):
         if m.group('inline'):
             return r'\(' + self.unescape(m.group('inline')).replace("\0292\03", '\\\\\\\\') + r'\)'
