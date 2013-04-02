@@ -24,7 +24,7 @@ def gravatar(string):
 stripper = re.compile(r'<.*?>')
 @register.filter(name='stripmd')
 def stripmd(string):
-    tmp = unsafe_parser.reset().convert(string)
+    tmp = posts.md.unsafe_parser.reset().convert(string)
     return stripper.sub('', tmp)
 
 class MarkdownNode(template.Node):
