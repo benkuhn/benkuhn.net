@@ -31,7 +31,6 @@ def by_slug(request, slug=''):
                                           'comment_count':comment_count})
 
 def isLegitEmail(email):
-    return True
     try:
         validate_email(email)
         return True
