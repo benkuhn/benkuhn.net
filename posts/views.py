@@ -12,6 +12,7 @@ from django.core.exceptions import ValidationError
 from django.template.loader import get_template
 from django.template import Context
 from django.core.mail import EmailMessage
+import md
 
 def by_slug(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
@@ -149,7 +150,7 @@ class RssFeed(Feed):
         return post.title
 
     def item_description(self, post):
-        return post.excerpt
+        return md.unsafe_parser.reset().convert(post.excerpt)
 
     item_guid_is_permalink = False
     def item_guid(self, post):
