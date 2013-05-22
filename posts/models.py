@@ -8,7 +8,7 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
     def get_absolute_url(self):
-        return '/tag/' + self.slug + '/0/'
+        return '/tag/' + self.slug + '/1/'
 
 class Post(models.Model):
     HIDDEN = 0

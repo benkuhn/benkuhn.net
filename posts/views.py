@@ -58,7 +58,7 @@ def do_comment(request, post, attrs, all_comments=None):
     else:
         comment.subscribed = False
         # make sure same ip has consistent gravatar
-        comment.email = hashlib.sha1(comment.text).hexdigest()
+        comment.email = hashlib.sha1(comment.text.encode('utf-8')).hexdigest()
     comment.save()
     all_comments.append(comment)
     if comment.spam:
@@ -92,6 +92,17 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+def utf8dict(d):
+    out = {}
+    for k, v in d.iteritems:
+        if isinstance(v, unicode):
+            v = v.encode('utf8')
+        elif isinstance(v, str):
+            # Must be encoded in UTF-8; raise exception otherwise
+            v.decode('utf8')
+        out[k] = v
+    return out
+
 def akismet_check(request, comment):
     if settings.AKISMET_KEY == '':
         return comment.name == 'viagra-test-123'
@@ -107,31 +118,36 @@ def akismet_check(request, comment):
         'comment_content'      : comment.text,
         }
     url = 'http://' + settings.AKISMET_KEY + '.rest.akismet.com/1.1/comment-check'
-    r = urllib2.urlopen(url, data=urllib.urlencode(params)).read()
+    r = urllib2.urlopen(url, data=urllib.urlencode(utf8dict(params))).read()
     if 'true' == r:
         return True
     else:
         return False
 
-def tag(request, slug='', page=0, title=''):
+def tag(request, slug=None, page=None, title=None):
     postList = Post.objects.prefetch_related('tags').filter(state=Post.PUBLISHED).order_by('-datePosted')
     if page is None:
         page = 1
-    if slug is not None:
+    else:
+        page = int(page)
+    if slug is None:
+        page_root = '/archive'
+    else:
+        page_root = '/tag/' + slug
         tag = get_object_or_404(Tag, slug=slug)
         title = 'posts tagged ' + tag.name
         postList = postList.filter(tags__slug=slug)
-    paginator = Paginator(postList, 10)
-    page = int(page) + 1
+    paginator = Paginator(postList, 4)
     if page > paginator.num_pages:
         raise Http404
     posts = paginator.page(page)
     if len(posts) == 0:
         raise Http404
     return render(request, 'tag.html', { 'posts':posts,
-                                         'title':title })
+                                         'title':title,
+                                         'page_root':page_root })
 
-def archive(request, page=0):
+def archive(request, page=None):
     return tag(request, slug=None, page=page, title='archive')
 
 class RssFeed(Feed):

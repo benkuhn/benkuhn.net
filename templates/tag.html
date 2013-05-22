@@ -2,9 +2,11 @@
 {% load md %}
 {% block content %}
 
-<p>{% if posts.has_previous %}<a href="../{{ posts.previous_page_number }}">newer</a>{% endif %}
-{% if posts.has_next %}<a href="../{{ posts.next_page_number }}">older</a>{% endif %}</p>
-
 {% include "post_list.html" %}
+
+{% block pagenav %}
+<p>{% if posts.has_previous %}<a href="{{ page_root }}/{{ posts.previous_page_number }}/">newer</a>{% endif %}
+{% if posts.has_next %}<a href="{{ page_root }}/{{ posts.next_page_number }}/">older</a>{% endif %}</p>
+{% endblock %}
 
 {% endblock %}

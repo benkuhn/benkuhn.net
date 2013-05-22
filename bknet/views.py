@@ -3,7 +3,7 @@ from posts.models import Post, Tag
 from posts.views import tag
 
 def home(request):
-    return tag(request, slug=None, page=0, title='Ben Kuhn')
+    return tag(request, title='Ben Kuhn')
 
 def contact(request):
     return render(request, 'contact.html', { 'title':'contact' })
