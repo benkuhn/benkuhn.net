@@ -67,6 +67,8 @@ def do_comment(request, post, attrs, all_comments=None):
     for c in all_comments:
         if c.subscribed and c.email != comment.email and isLegitEmail(c.email):
             emails[c.email] = c.name
+    for name, email in settings.MANAGERS:
+        emails[email] = name
     template = get_template('comment_email.html')
     subject = "Someone replied to your comment"
     for email, name in emails.iteritems():
