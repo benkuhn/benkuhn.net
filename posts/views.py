@@ -96,7 +96,7 @@ def get_client_ip(request):
 
 def utf8dict(d):
     out = {}
-    for k, v in d.iteritems:
+    for k, v in d.iteritems():
         if isinstance(v, unicode):
             v = v.encode('utf8')
         elif isinstance(v, str):

@@ -29,7 +29,6 @@ class InlineMath(Pattern):
                  ('125', r'\\}'))
         for needle, sub in repls:
             s = s.replace("\02%s\03" % needle, sub)
-        print s
         return s
     def handleMatch(self, m):
         if m.group('inline'):
