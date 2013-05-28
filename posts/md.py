@@ -22,11 +22,20 @@ class Texer(Extension):
 class InlineMath(Pattern):
     def __init__(self, markdown):
         Pattern.__init__(self, r'((?P<display>\$\$[^\s](.*?[^\s])??\$\$)|\$(?P<inline>[^\s](.*?[^\s])??)\$(?=[^\d]|$))', markdown_instance=markdown)
+    def argh(self, s):
+        s = self.unescape(s)
+        repls = (('92',  r'\\\\'),
+                 ('123', r'\\{'),
+                 ('125', r'\\}'))
+        for needle, sub in repls:
+            s = s.replace("\02%s\03" % needle, sub)
+        print s
+        return s
     def handleMatch(self, m):
         if m.group('inline'):
-            return r'\(' + self.unescape(m.group('inline')).replace("\0292\03", '\\\\\\\\') + r'\)'
+            return r'\(' + self.argh(m.group('inline')) + r'\)'
         else:
-            return self.unescape(m.group('display')).replace("\0292\03", '\\\\\\\\')
+            return self.argh(m.group('display'))
 
 unsafe_parser = markdown.Markdown(extensions=[Texer(), 'footnotes', 'smartypants'])
 safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow(), Texer()])
