@@ -139,8 +139,10 @@ def tag(request, slug=None, page=None, title=None):
         tag = get_object_or_404(Tag, slug=slug)
         title = 'posts tagged ' + tag.name
         postList = postList.filter(tags__slug=slug)
-    paginator = Paginator(postList, 4)
+    paginator = Paginator(postList, 10)
     if page > paginator.num_pages:
+        raise Http404
+    if page < 1:
         raise Http404
     posts = paginator.page(page)
     if len(posts) == 0:
