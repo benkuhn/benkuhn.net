@@ -24,8 +24,8 @@ class Post(models.Model):
     state = models.IntegerField(choices=STATES)
     slug = models.SlugField()
     title = models.CharField(max_length=300)
-    text = models.TextField()
-    excerpt = models.TextField()
+    text = models.TextField(blank=True)
+    excerpt = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, related_name="posts")
     def get_absolute_url(self):
         return '/' + self.slug
@@ -37,7 +37,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
     name = models.CharField(max_length=300)
-    email = models.CharField(max_length=300)
+    email = models.CharField(max_length=300, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     spam = models.BooleanField()
