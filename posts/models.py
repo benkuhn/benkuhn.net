@@ -37,7 +37,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
     name = models.CharField(max_length=300)
-    email = models.CharField(max_length=300, blank=True)
+    email = models.CharField(max_length=300)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     spam = models.BooleanField()
