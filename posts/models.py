@@ -49,3 +49,6 @@ class Comment(models.Model):
         if self.spam:
             ret += u' [SPAM]'
         return ret
+
+class Subscription(models.Model):
+    email = models.CharField(max_length=300)

@@ -1,0 +1,12 @@
+{% load md %}<p>Hi!</p>
+
+<p> This is just to let you know that there's a new article on benkuhn.net, <a href="http://www.benkuhn.net{{post.get_absolute_url}}">"{{post.title}}"</a>:</p>
+
+<blockquote>
+    {% markdown %}
+{{ post.excerpt|safe }}
+    {% endmarkdown %}
+</blockquote>
+
+<p>If you don't want to receive these emails anymore, you
+can <a href="http://www.benkuhn.net/unsub/{{email|urlencode}}">unsubscribe</a>.</p>

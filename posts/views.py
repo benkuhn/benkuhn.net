@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
-from models import Post, Tag, Comment
+from models import Post, Tag, Comment, Subscription
 from django.db.models import Q
 import md5, urllib, urllib2, hashlib
 from django.conf import settings
@@ -30,6 +30,21 @@ def by_slug(request, slug=''):
                                           'mathjax':True,
                                           'comments':comments,
                                           'comment_count':comment_count})
+
+def send_emails(request, slug=''):
+    post = get_object_or_404(Post, slug=slug)
+    subs = Subscription.objects.all()
+    emails = list(set([sub.email for sub in subs]))
+    template = get_template('post_email.html')
+    subject = "New post at benkuhn.net: \"%s\"" % post.title
+    for email in emails:
+        text = template.render(Context({
+                    'post':post,
+                    'email':email }))
+        msg = EmailMessage(subject, text, "robot@benkuhn.net", [email])
+        msg.content_subtype = 'html'
+        msg.send()
+    return render(request, 'sent.html', { 'title':'Sent!' })
 
 def isLegitEmail(email):
     try:
@@ -84,6 +99,40 @@ def do_comment(request, post, attrs, all_comments=None):
 def unsub(request, slug='', email=''):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(email=email).update(subscribed=False)
+    return render(request, 'unsub.html', { 'title':'farewell' })
+
+def email(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        if isLegitEmail(email) and request.POST['name'] == '':
+            o = Subscription(email=email)
+            o.save()
+            template = get_template('subscribe_email.html')
+            text = template.render(Context({
+                        'email': email
+                        }))
+            print 'text!!!'
+            msg = EmailMessage("Thanks for subscribing!", text, "robot@benkuhn.net", [email])
+            msg.content_subtype = 'html'
+            msg.send()
+            emails = [e for (name, e) in settings.MANAGERS]
+            msg2 = EmailMessage(email + " subscribed to benkuhn.net", "", "robot@benkuhn.net", emails)
+            msg2.send()
+        return render(request, 'sub.html', { 'title': 'thanks :)',
+                                             'email': email })
+    else:
+        return render(request, 'email.html', { 'title': 'subscribe via email' })
+
+def subscribers(request):
+    if not (request.user.is_authenticated() and request.user.is_staff):
+        raise Http404
+    subs = Subscription.objects.all()
+    return render(request, 'subscribers.html', { 'title': 'subscribers',
+                                                 'subscribers': subs })
+
+def global_unsub(request, email=''):
+    o = get_object_or_404(Subscription, email=email)
+    o.delete()
     return render(request, 'unsub.html', { 'title':'farewell' })
 
 def get_client_ip(request):

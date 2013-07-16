@@ -14,8 +14,12 @@ pset = [
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
     url(r'^tag/(?P<slug>[\w-]+)/(?P<page>\d+)/$', 'posts.views.tag'),
     url(r'^rss/$', 'posts.views.rss'),
+    url(r'^email/$', 'posts.views.email'),
+    url(r'^subscribers/$', 'posts.views.subscribers'),
+    url(r'^unsub/(?P<email>.+)$', 'posts.views.global_unsub'),
     url(r'^archive/(?P<page>\d+)/$', 'posts.views.archive'),
     url(r'^(?P<slug>[\w-]+)$', 'posts.views.by_slug'),
+    url(r'^sendmail/(?P<slug>[\w-]+)$', 'posts.views.send_emails'),
     url(r'^q/$', 'posts.views.queue'),
     url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub')
     ]

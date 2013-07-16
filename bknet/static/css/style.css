@@ -226,8 +226,6 @@ form {
 }
 .name {
     font-weight: bold;
-    /*font-variant: small-caps;
-    font-size: 18px;*/
     color: #222;
 }
 .number {
@@ -246,4 +244,20 @@ form {
 }
 .comments {
     /*margin: 0 20px;*/
+}
+.subscribe {
+    font-style: italic;
+}
+#sub-text {
+    width: 69%;
+}
+#sub-button {
+    width: 29%;
+}
+.nope {
+    width: 0 !important;
+    height: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }

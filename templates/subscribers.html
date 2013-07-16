@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>The following emails are subscribed:</p>
+{% for s in subscribers %}
+<p>{{ s.email }}</p>
+{% endfor %}
+
+{% endblock %}

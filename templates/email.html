@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>Enter your email in the form below, and I'll email you whenever I post something new here!</p>
+
+<form action="." method="POST">
+  {% csrf_token %}
+  <input type="text" placeholder="me@example.com" id="sub-text" name="email" />
+  <input type="submit" value="subscribe me!" id="sub-button"></input>
+  <input type="text" placeholder="John Doe" class="nope" name="name" />
+</form>
+{% endblock %}
