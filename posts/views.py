@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from models import Post, Tag, Comment, Subscription
 from django.db.models import Q
 import md5, urllib, urllib2, hashlib
@@ -22,7 +22,7 @@ def by_slug(request, slug=''):
     comments = list(post.comments.all().order_by('date'))
     if (request.method == 'POST'):
         do_comment(request, post, request.POST, all_comments=comments)
-        post = get_object_or_404(Post, slug=slug)
+        return HttpResponseRedirect(post.get_absolute_url())
     comment_count = len([comment for comment in comments if not comment.spam])
     return render(request, 'post.html', { 'post': post,
                                           'editable':editable,
@@ -56,7 +56,10 @@ def isLegitEmail(email):
 def do_comment(request, post, attrs, all_comments=None):
     if not ('name' in attrs
             and 'text' in attrs
-            and 'email' in attrs):
+            and 'email' in attrs
+            and 'lastname' in attrs):
+        return False
+    if not attrs['lastname'] == "":
         return False
     if all_comments is None:
         all_comments = list(post.comments.all())
@@ -72,8 +75,8 @@ def do_comment(request, post, attrs, all_comments=None):
         comment.subscribed = attrs.get('subscribed', False)
     else:
         comment.subscribed = False
-        # make sure same ip has consistent gravatar
-        comment.email = hashlib.sha1(comment.text.encode('utf-8')).hexdigest()
+        # make sure same name has consistent gravatar
+        comment.email = hashlib.sha1(comment.name.encode('utf-8')).hexdigest()
     comment.save()
     all_comments.append(comment)
     if comment.spam:
@@ -104,7 +107,7 @@ def unsub(request, slug='', email=''):
 def email(request):
     if request.method == 'POST':
         email = request.POST['email']
-        if isLegitEmail(email) and request.POST['name'] == '':
+        if isLegitEmail(email) and request.POST['lastname'] == '':
             o = Subscription(email=email)
             o.save()
             template = get_template('subscribe_email.html')

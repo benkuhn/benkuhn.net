@@ -10,3 +10,6 @@ def contact(request):
 
 def projects(request):
     return render(request, 'projects.html', { 'title': 'projects' })
+
+def privacy(request):
+    return render(request, 'privacy.html', { 'title': 'privacy' })

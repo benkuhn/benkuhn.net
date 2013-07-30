@@ -38,12 +38,13 @@
 <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}" style="display:none;">
   {% csrf_token %}
   <div class="col2 left">
-    <input type="text" class="field" name="name" placeholder="name"></input>
+    <input type="text" class="field" name="name" placeholder="name (optional)"></input>
   </div>
   <div class="col2 right">
-    <input type="text" class="field" name="email" placeholder="email"></input>
+    <input type="text" class="field" name="email" placeholder="email (optional)"></input>
   </div>
-  <textarea class="field" name="text" placeholder="comment"></textarea>
+  <input type="text" placeholder="John Doe" class="nope" name="lastname" />
+  <textarea class="field" name="text" placeholder="comment (not optional)"></textarea>
   <div class="right submit">
     <input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input>
     <span class="info">follow</span><br/><br/>
@@ -52,9 +53,9 @@
   </div>
   <span class="submit info">format posts
   in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. put
-  TeX math between $ signs without spaces around the edges. email is
-  used to make sure you're a human and get
-  your <a href="http://gravatar.com/">gravatar</a>.</span>
+  TeX math between $ signs without spaces around the edges. email will
+  only be used for the most <a href="/privacy/">wholesome
+  purposes</a>.</span>
 </form>
 {% for comment in comments %}
 {% include "comment_single.html" %}
