@@ -36,5 +36,5 @@ class InlineMath(Pattern):
         else:
             return self.argh(m.group('display'))
 
-unsafe_parser = markdown.Markdown(extensions=[Texer(), 'footnotes', 'smartypants'])
+unsafe_parser = markdown.Markdown(extensions=[Texer(), 'footnotes', 'smartypants', 'toc'])
 safe_parser = markdown.Markdown(safe_mode='escape', extensions=['smartypants', Nofollow(), Texer()])
