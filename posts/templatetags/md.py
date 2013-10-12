@@ -11,7 +11,7 @@ def do_markdown(parser, token):
     return MarkdownNode(nodelist, safe=False)
 
 @register.tag(name='usermarkdown')
-def do_markdown(parser, token):
+def do_user_markdown(parser, token):
     nodelist = parser.parse(('endusermarkdown',))
     parser.delete_first_token()
     return MarkdownNode(nodelist, safe=True)

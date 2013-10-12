@@ -1,7 +1,7 @@
 {% load md %}
 {% if compact %}
 <h2 class="post_title">
-  <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+  <a href="{{ post.get_absolute_url }}">{% markdown %}{{ post.title }}{% endmarkdown %}</a>
 </h2>
 {% endif %}
 </h2>
@@ -46,10 +46,11 @@
   <input type="text" placeholder="John Doe" class="nope" name="lastname" />
   <textarea class="field" name="text" placeholder="comment (not optional)"></textarea>
   <div class="right submit">
-    <input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input>
-    <span class="info">follow</span><br/><br/>
     <a class="right clicky"
-    onclick="javascript:document.getElementById('comment-form').submit()">submit</a>
+    onclick="javascript:document.getElementById('comment-form').submit()">preview</a><br/>
+    <a class="right clicky"
+    onclick="javascript:document.getElementById('comment-form').submit()">submit</a><br/>
+    <span class="right info"><input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input> subscribe</span>
   </div>
   <span class="submit info">format posts
   in <a href="http://daringfireball.net/projects/markdown/">markdown</a>. put
