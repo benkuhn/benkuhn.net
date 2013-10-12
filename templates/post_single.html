@@ -1,7 +1,7 @@
 {% load md %}
 {% if compact %}
 <h2 class="post_title">
-  <a href="{{ post.get_absolute_url }}">{% markdown %}{{ post.title }}{% endmarkdown %}</a>
+  <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
 </h2>
 {% endif %}
 </h2>

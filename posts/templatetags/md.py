@@ -27,6 +27,18 @@ def stripmd(string):
     tmp = posts.md.unsafe_parser.reset().convert(string)
     return stripper.sub('', tmp)
 
+filters = [
+    (re.compile(r'"([^\s])'), '&ldquo;\\1'),
+    (re.compile(r'([^\s])"'), '\\1&rdquo;'),
+    (re.compile(r"([^\s])'"), "\\1&rsquo;"),
+    (re.compile(r"'([^\s])"), "&lsquo;\\1"),
+    ]
+@register.filter(name='quotify')
+def quotify(string):
+    for (regex, sub) in filters:
+        string = regex.sub(sub, string)
+    return string
+
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):
         self.nodelist = nodelist
