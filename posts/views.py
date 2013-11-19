@@ -1,4 +1,3 @@
-# Create your views here.
 from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -14,13 +13,17 @@ from django.template import Context
 from django.core.mail import EmailMessage
 import md
 
+# /<slug>
+# view for a single post, e.g. http://benkuhn.net/www-prefix
 def by_slug(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
+    # should we insert an "edit" link?
     editable = request.user.is_authenticated() and request.user.is_staff
     if post.state == Post.HIDDEN and not editable:
         raise Http404
     comments = list(post.comments.all().order_by('date'))
     if (request.method == 'POST'):
+        # we're being commented on
         do_comment(request, post, request.POST, all_comments=comments)
         return HttpResponseRedirect(post.get_absolute_url())
     comment_count = len([comment for comment in comments if not comment.spam])
@@ -31,9 +34,11 @@ def by_slug(request, slug=''):
                                           'comments':comments,
                                           'comment_count':comment_count})
 
+# send updates for a newly-published post
 def send_emails(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
     subs = Subscription.objects.all()
+    # de-duplicate emails by putting them in a set
     emails = list(set([sub.email for sub in subs]))
     template = get_template('post_email.html')
     subject = "New post at benkuhn.net: \"%s\"" % post.title
@@ -53,16 +58,26 @@ def isLegitEmail(email):
     except ValidationError:
         return False
 
+# all the processing associated with a posted comment: spam filtering,
+# sending emails to subscribers, etc.
+#
+# 'attrs' is the form data to use;
+# 'all_comments' can optionally be supplied if it's been prefetched,
+# and otherwise is list(post.comments.all()).
 def do_comment(request, post, attrs, all_comments=None):
+    # make sure the form came through correctly
     if not ('name' in attrs
             and 'text' in attrs
             and 'email' in attrs
             and 'lastname' in attrs):
         return False
+    # 'lastname' is a honeypot field
     if not attrs['lastname'] == "":
         return False
+    # keyword parameter is for prefetching
     if all_comments is None:
         all_comments = list(post.comments.all())
+    ### create a new comment record
     comment = Comment()
     comment.post = post
     comment.name = attrs['name'].strip()
@@ -70,17 +85,19 @@ def do_comment(request, post, attrs, all_comments=None):
         comment.name = 'Anonymous'
     comment.text = attrs['text']
     comment.email = attrs['email']
+    ### check for spam (requires a web request to Akismet)
     comment.spam = akismet_check(request, comment)
     if isLegitEmail(comment.email):
         comment.subscribed = attrs.get('subscribed', False)
     else:
         comment.subscribed = False
-        # make sure same name has consistent gravatar
+        # make sure comments under the same name have a consistent gravatar
         comment.email = hashlib.sha1(comment.name.encode('utf-8')).hexdigest()
     comment.save()
     all_comments.append(comment)
     if comment.spam:
         return # don't email people for spam comments!
+    ### send out notification emails
     emails = {}
     for c in all_comments:
         if c.subscribed and c.email != comment.email and isLegitEmail(c.email):
@@ -99,11 +116,15 @@ def do_comment(request, post, attrs, all_comments=None):
         msg.content_subtype = 'html'
         msg.send()
 
+# /unsub/<slug>/<email>
+# handle unsubscribe links from emails
 def unsub(request, slug='', email=''):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(email=email).update(subscribed=False)
     return render(request, 'unsub.html', { 'title':'farewell' })
 
+# /email/
+# display the "subscribe via email" form and handle submissions
 def email(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -126,6 +147,8 @@ def email(request):
     else:
         return render(request, 'email.html', { 'title': 'subscribe via email' })
 
+# /subscribers/
+# for me to get a list of my email subscribers
 def subscribers(request):
     if not (request.user.is_authenticated() and request.user.is_staff):
         raise Http404
@@ -133,11 +156,14 @@ def subscribers(request):
     return render(request, 'subscribers.html', { 'title': 'subscribers',
                                                  'subscribers': subs })
 
+# /unsub/<email>
+# allow blog subscribers to unsubscribe
 def global_unsub(request, email=''):
     o = get_object_or_404(Subscription, email=email)
     o.delete()
     return render(request, 'unsub.html', { 'title':'farewell' })
 
+# convenience method for helping Akismet with stuff
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -146,6 +172,10 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+# helper method for Akismet encoding sadness
+#
+# public domain code from somewhere, likely Stack Overflow, but I
+# don't remember where
 def utf8dict(d):
     out = {}
     for k, v in d.iteritems():
@@ -157,6 +187,7 @@ def utf8dict(d):
         out[k] = v
     return out
 
+# fill out the data Akismet needs
 def akismet_check(request, comment):
     if settings.AKISMET_KEY == '':
         return comment.name == 'viagra-test-123'
@@ -178,6 +209,10 @@ def akismet_check(request, comment):
     else:
         return False
 
+# /tag/<slug>/<page>/
+# handles all posts for a certain tag e.g. benkuhn.net/rationality
+#
+# 'page' is for in case you want to show older posts
 def tag(request, slug=None, page=None, title=None):
     postList = Post.objects.prefetch_related('tags').filter(state=Post.PUBLISHED).order_by('-datePosted')
     if page is None:
@@ -203,9 +238,11 @@ def tag(request, slug=None, page=None, title=None):
                                          'title':title,
                                          'page_root':page_root })
 
+# /archive/<page>/
 def archive(request, page=None):
     return tag(request, slug=None, page=page, title='archive')
 
+# fills in the appropriate getters for an RSS feed
 class RssFeed(Feed):
     title = "benkuhn.net"
     link = "/"
@@ -231,8 +268,11 @@ class RssFeed(Feed):
     def item_categories(self, post):
         return [tag.name for tag in post.tags.all()]
 
+# /rss/
 rss = RssFeed()
 
+# /q/
+# list all the unpublished posts for easy browsing
 def queue(request):
     if not (request.user.is_authenticated() and request.user.is_staff):
         raise Http404
