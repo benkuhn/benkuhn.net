@@ -18,7 +18,8 @@ pset = [
     url(r'^(?P<slug>[\w-]+)$', 'posts.views.by_slug'),
     url(r'^sendmail/(?P<slug>[\w-]+)$', 'posts.views.send_emails'),
     url(r'^q/$', 'posts.views.queue'),
-    url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub')
+    url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub'),
+    url(r'^preview/$', 'posts.views.preview'),
     ]
 for name in ['contact', 'projects', 'privacy']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))

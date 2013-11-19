@@ -43,7 +43,7 @@ class Comment(models.Model):
     spam = models.BooleanField()
     subscribed = models.BooleanField()
     def get_absolute_url(self):
-        return self.post.get_absolute_url() + '#comment-' + self.id
+        return self.post.get_absolute_url() + '#comment-' + str(self.id)
     def __unicode__(self):
         ret = u'"%s" by %s' % (self.text[:30], self.email)
         if self.spam:

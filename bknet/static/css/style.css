@@ -104,7 +104,7 @@ blockquote {
     border-left-style: solid;
     border-left-color:#ccc;
 }
-.info,.abccredit,.tags,footer {
+.info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
     color:#666;
 }
 .tags {
@@ -195,6 +195,10 @@ label {
 textarea {
     height: 50px;
     margin-top: 10px;
+}
+#preview-frame {
+    border: 0;
+    width: 100%;
 }
 .submit {
     padding: 5px 0;

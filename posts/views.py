@@ -51,6 +51,12 @@ def send_emails(request, slug=''):
         msg.send()
     return render(request, 'sent.html', { 'title':'Sent!' })
 
+# /preview/
+# preview a Markdown thing
+def preview(request):
+    text = request.POST['text']
+    return render(request, 'preview.html', { 'text':text })
+
 def isLegitEmail(email):
     try:
         validate_email(email)
