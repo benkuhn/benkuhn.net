@@ -29,6 +29,8 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, related_name="posts")
     def get_absolute_url(self):
         return '/' + self.slug
+    def get_sendmail_url(self):
+        return '/sendmail/' + self.slug
     def get_edit_url(self):
         return '/admin/posts/post/' + str(self.id) + '/'
     def __unicode__(self):

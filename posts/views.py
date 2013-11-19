@@ -34,9 +34,14 @@ def by_slug(request, slug=''):
                                           'comments':comments,
                                           'comment_count':comment_count})
 
+# /sendmail/<slug>
 # send updates for a newly-published post
 def send_emails(request, slug=''):
     post = get_object_or_404(Post, slug=slug)
+    # make sure only I can send email
+    editable = request.user.is_authenticated() and request.user.is_staff
+    if post.state == Post.HIDDEN or not editable:
+        raise Http404
     subs = Subscription.objects.all()
     # de-duplicate emails by putting them in a set
     emails = list(set([sub.email for sub in subs]))
