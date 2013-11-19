@@ -29,10 +29,12 @@
 {% if not compact %}
 <p class="subscribe">Enjoyed this post? Get notified of new ones via <a href="/email/">email</a> or <a href="/rss/">RSS.</a></p>
 <p class="comment-intro">
-  <strong>
-    {% if not comment_count %}no{% else %}{{ comment_count }}{% endif %}
-    comment{{ comment_count|pluralize }}
-  </strong> &bull; <a class="clicky" onclick="javascript:var el = document.getElementById('comment-form'); if (el.style.display == 'block') el.style.display = 'none'; else el.style.display = 'block'">comment</a>
+  {% if not comment_count %}
+    no comments yet
+  {% else %}
+    <strong>{{ comment_count }} comment{{ comment_count|pluralize }}</strong>
+  {% endif %}
+  &bull; <a class="clicky" onclick="javascript:var el = document.getElementById('comment-form'); if (el.style.display == 'block') el.style.display = 'none'; else el.style.display = 'block'">comment</a>
 </p>
 <div class="comments">
 <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}" style="display:none;">

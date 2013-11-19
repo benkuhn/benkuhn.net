@@ -259,7 +259,7 @@ class RssFeed(Feed):
         return post.title
 
     def item_description(self, post):
-        return md.unsafe_parser.reset().convert(post.excerpt)
+        return md.unsafe_parser.reset().convert(post.text)
 
     item_guid_is_permalink = False
     def item_guid(self, post):
