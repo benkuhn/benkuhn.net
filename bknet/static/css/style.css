@@ -255,7 +255,7 @@ form {
 
 /* fonts */
 html {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Georgia', serif;
 }
 h1.title {
     font-size: 40px;
@@ -272,8 +272,8 @@ h2 {
 }
 
 p, li {
-    font-size: 14px;
-    line-height: 170%;
+    font-size: 16px;
+    line-height: 165%;
 }
 h1, h2 {
     font-weight: 400;
