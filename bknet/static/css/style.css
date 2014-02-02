@@ -36,7 +36,6 @@ li {
 /* side panel */
 .nav {
     text-align: center;
-    line-height: 20px;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -61,6 +60,9 @@ img.me {
     margin-right:auto;
     box-shadow:0px 0px 6px 0px #666;
 }
+#top-posts ul {
+    margin: 0 0 0 2em;
+}
 
 /* text */
 a {
@@ -75,20 +77,6 @@ a:visited {
 }
 h2 a {
     color: #222 !important;
-}
-h1, h2 {
-    font-weight: 400;
-    margin:0 auto;
-    line-height: 1em;
-}
-h1 {
-    font-size: 30pt;
-}
-h2 {
-    font-size: 22pt;
-}
-p, li {
-    line-height: 1.6em;
 }
 p {
     margin:8px 0;
@@ -131,7 +119,6 @@ html {
     margin: 0;
     border-top: solid 8px #333;
     color:#222;
-    font: 16px 'Georgia', serif;
 }
 * { box-sizing: border-box; }
 body {
@@ -139,11 +126,11 @@ body {
 }
 #aside {
     float: left;
-    width: 168px;
+    width: 208px;
 }
 #main {
     float: right;
-    width: 560px;
+    width: 520px;
 }
 footer {
     width: 100%;
@@ -264,4 +251,31 @@ form {
     border: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
+}
+
+/* fonts */
+html {
+    font-family: 'Libre Baskerville', serif;
+}
+h1.title {
+    font-size: 40px;
+    line-height: 1.2em;
+}
+h1, h2, h3, h4, h5 {
+    line-height: 1.4em;
+}
+h1 {
+    font-size: 30pt;
+}
+h2 {
+    font-size: 22pt;
+}
+
+p, li {
+    font-size: 14px;
+    line-height: 170%;
+}
+h1, h2 {
+    font-weight: 400;
+    margin:0 auto;
 }

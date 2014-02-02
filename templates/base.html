@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:site_name" content="benkuhn.net" />
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css' />
     {% block extra_meta %}{% endblock %}
     <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
     {% if not user.is_authenticated or not user.is_staff %}
@@ -95,23 +96,26 @@ altruism][], and other strange activities.
 
 {% endmarkdown %}
         <hr class="med"></hr>
-        <div class="nav">
+        <p class="nav">
           <a href="/">home</a> &bull;
           <a href="/contact/">contact</a> &bull;
           <a href="/rss/">rss</a>
-        </div>
+        </p>
         <hr class="med"></hr>
-        Top posts:
+        <div id="top-posts">
 {% markdown %}
-- [Plans](/plans-i)
-- [Satvik Beri](/satvik)
-- [Facebook cat](/fbcat)
+Top posts:
+
+- [My current plans](/plans-i)
+- [A conversation with Satvik Beri](/satvik)
+- [Facebook &rarr; kittens](/fbcat)
 - [Doing things I'm terrible at](/terrible)
-- [Crocker’s Rules](/crocker)
-- [Contra dance etiquette](/contra-etiquette)
-- [Critique of EA](/ea-critique)
-- [Exploration / exploitation](/exploration)
+- [Declaring Crocker’s Rules](/crocker)
+- [A short rant about contra dance etiquette](/contra-etiquette)
+- [Critique of effective altruism](/ea-critique)
+- [Exploration and exploitation](/exploration)
 {% endmarkdown %}
+        </div>
       </div>
       <div id="main" class="centerpage">
         <h1 class="title">{{ title|quotify|safe }}</h1>
