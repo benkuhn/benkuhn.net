@@ -35,35 +35,16 @@
   {% else %}
     <strong>{{ comment_count }} comment{{ comment_count|pluralize }}</strong>
   {% endif %}
-  &bull; <a class="clicky" onclick="javascript:var el = document.getElementById('comment-form'); if (el.style.display == 'block') el.style.display = 'none'; else el.style.display = 'block'">comment</a>
+  &bull; {% include "comment_show.html" with id="comment-form-top" %}
 </p>
 <div class="comments">
-<form id="comment-form" method="POST" action="{{ post.get_absolute_url }}" style="display:none;">
-  {% csrf_token %}
-  <div class="col2 left">
-    <input type="text" class="field" name="name" placeholder="name (optional)"></input>
-  </div>
-  <div class="col2 right">
-    <input type="text" class="field" name="email" placeholder="email (optional)"></input>
-  </div>
-  <input type="text" placeholder="John Doe" class="nope" name="lastname" autocomplete="off" />
-  <textarea id="comment" class="field" name="text" placeholder="comment (not optional)"></textarea>
-  <div class="right submit">
-    <a class="right clicky"
-    onclick="javascript:$.ajax('/preview/',{type:'POST',data:{text:$('#comment').val()},success:function (data) {console.log(data);$('#preview-frame').empty().append(data); MathJax.Hub.Queue(['Typeset',MathJax.Hub, $('#preview-frame')[0]]);}});">preview</a><br/>
-    <a class="right clicky"
-    onclick="javascript:document.getElementById('comment-form').submit()">submit</a><br/>
-    <span class="right info"><input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input> subscribe</span>
-  </div>
-  <span class="submit info">format posts
-  in <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. put
-  TeX math between $ signs without spaces around the edges. email will
-  only be used for <a href="/privacy/">the most wholesome
-  purposes</a>.</span>
-  <div id="preview-frame"></div>
-</form>
+{% include "comment_form.html" with id="comment-form-top" %}
 {% for comment in comments %}
 {% include "comment_single.html" %}
+{% if forloop.last %}
+<p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
+{% include "comment_form.html" with id="comment-form-bottom" %}
+{% endif %}
 {% endfor %}
 </div>
 {% endif %}

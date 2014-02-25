@@ -1,0 +1,24 @@
+<form id="{{ id }}" method="POST" action="{{ post.get_absolute_url }}" style="display:none;">
+  {% csrf_token %}
+  <div class="col2 left">
+    <input type="text" class="field" name="name" placeholder="name (optional)"></input>
+  </div>
+  <div class="col2 right">
+    <input type="text" class="field" name="email" placeholder="email (optional)"></input>
+  </div>
+  <input type="text" placeholder="John Doe" class="nope" name="lastname" autocomplete="off" />
+  <textarea id="{{id}}-comment" class="field" name="text" placeholder="comment (not optional)"></textarea>
+  <div class="right submit">
+    <a class="right clicky"
+    onclick="javascript:$.ajax('/preview/',{type:'POST',data:{text:$('#{{id}}-comment').val()},success:function (data) {console.log(data);$('#{{id}}-preview').empty().append(data); MathJax.Hub.Queue(['Typeset',MathJax.Hub, $('#{{id}}-preview')[0]]);}});">preview</a><br/>
+    <a class="right clicky"
+    onclick="javascript:document.getElementById('{{ id }}').submit()">submit</a><br/>
+    <span class="right info"><input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input> subscribe</span>
+  </div>
+  <span class="submit info">format posts
+  in <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. put
+  TeX math between $ signs without spaces around the edges. email will
+  only be used for <a href="/privacy/">the most wholesome
+  purposes</a>.</span>
+  <div id="{{id}}-preview"></div>
+</form>

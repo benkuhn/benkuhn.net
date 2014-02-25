@@ -59,7 +59,7 @@ def send_emails(request, slug=''):
 # /preview/
 # preview a Markdown thing
 def preview(request):
-    text = request.POST['text']
+    text = request.POST.get('text', '')
     return render(request, 'preview.html', { 'text':text })
 
 def isLegitEmail(email):
