@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/benkuhn
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.benkuhn.net
+  * I am benkuhn (https://keybase.io/benkuhn) on keybase.
+  * I have a public key with fingerprint 2CB4 EC24 9AC0 8DA6 83DE  8BD8 9706 BEC4 1F2D 3723
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "2cb4ec249ac08da683de8bd89706bec41f2d3723",
+            "host": "keybase.io",
+            "key_id": "9706BEC41F2D3723",
+            "uid": "1fe33b45b5ed44ff93d7c8ce7667e500",
+            "username": "benkuhn"
+        },
+        "service": {
+            "hostname": "www.benkuhn.net",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1397253448,
+    "expire_in": 157680000,
+    "prev": "a16ac24d2d6a394f8deb3bfb444858d8bfc86cddd3a17781c4f49f862a647cbd",
+    "seqno": 2,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.14 (GNU/Linux)
+
+owGbwMvMwMS4w6o1efudEj7G0wc+JzEEe6R6VCsl5adUKllVK2Wngqm0zLz01KKC
+osy8EiUrJaPkJJPUZCMTy8RkA4uURDML45RUi6QUC0tzA7Ok1GQTwzSjFGNzI2Ml
+HaWM/GKQDqAxSYnFqXqZ+UAxICc+MwUoClLv5OpsYuhm5AJVXwqWMExLNTZOMjFN
+Mk1NMTFJS7M0TjFPtkhONTczM081NTAAKSxOLcpLzE0Fqk5KzcsuzchTqtVRAgqW
+ZSangpwMshmqoLy8XA+qSC8vtQSou6AovyQ/OT8HKJlRUlJgBdJbUlkAVpyaFA81
+Jj4pMy8F6HOghrLUouLM/DwlK0OgyuSSTJC5hsaW5kamxiYmFjpKqRUFmUWp8Zkg
+FabmZhYGQACyJrUMaGSioVkiMLhSjFLMEo0tTdIsUlKTjJPSkkyAWk0tUiyS0pIt
+zJJTUlKMEw3NzS0Mk03STCzTLMyMEs1MzJOTUpRAHivMy1eyMgI6MzEdaGRxZnpe
+YklpUapSbSeTDAsDIxMDGysTKO4YuDgFYDGat5j/f7X43YJzNV/mms8SvljftaLz
+1cZF2c+Zp8xXWyolwfrW3H1VzavffheWbFnWMFvPzjbdzyP96ccHLxP4r8v8m+wz
+/eZvP2+J7eu190k9uyV7hCPnpfb6Al57zpxzuZrNZ66y6H0uNixLcHE/OGX9x9Ny
+K2zzt3p3bXGw2PDxssKj42vXi17ZOSdCcO71v+4rynfIcxhsvfuI2+9OgYV27YYs
+q7ePT+8u86ltXPpP+cwawa7kNTdez1h9wnJJ7XvzPqbuh3uqnfwe1r72S+OctUPX
+I8l94e2dtyP2RWm/T6wpUEwLm37gTEKR6tZW9/J4jY+5XzaG7PPhN/I7s649en2b
+70upva/qvhvrF7g/vvcx23m9VldaRgPPt10vzk2Ydc5/8lGXuX/WirWs/HZhYgqD
+8bbjXz8Huby5n3bvsOus8EDNI22FR/ltjbenrv28ae6auxL9yvrX7n+vu93Ls0j1
+jsX9/xe+Mp/8sHaLzgmluhiF2/eF2Y+5aj3pMsreX5rs9Mbqj17vlo2VNVp7w6w9
+Q6U3T+Hg0/R25Nq/t+q4AuuM852Pd80/+Yoree9Sm9UO86uPeOdHae6Q/35SRm37
+vCznFgHJBR9uTa6b43TaTPeqC2+XhL72/ivKFXyvoytzD1nqla5z7imI27qi8MgB
+ke7dcX9/rfn7YcvRxX3eKov/f7jSsMJ79ZMQyb+FsyojG1Wva7/ifVjP2TQLAA==
+=y2Ji
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/benkuhn
+
+==================================================================

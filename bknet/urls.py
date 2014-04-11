@@ -20,6 +20,7 @@ pset = [
     url(r'^q/$', 'posts.views.queue'),
     url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub'),
     url(r'^preview/$', 'posts.views.preview'),
+    url(r'^.well-known/keybase.txt$', 'bknet.views.keybase'),
     ]
 for name in ['contact', 'projects', 'privacy']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))

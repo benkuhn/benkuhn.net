@@ -13,3 +13,6 @@ def projects(request):
 
 def privacy(request):
     return render(request, 'privacy.html', { 'title': 'privacy' })
+
+def keybase(request):
+    return render(request, 'keybase.txt', content_type='text/plain')
