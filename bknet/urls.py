@@ -22,7 +22,7 @@ pset = [
     url(r'^preview/$', 'posts.views.preview'),
     url(r'^.well-known/keybase.txt$', 'bknet.views.keybase'),
     ]
-for name in ['contact', 'projects', 'privacy']:
+for name in ['contact', 'projects', 'privacy', 'about']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
 
 urlpatterns = patterns('', *pset
