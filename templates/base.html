@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:site_name" content="benkuhn.net" />
-    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i|Inconsolata:400,700' rel='stylesheet' type='text/css'>
     {% block extra_meta %}{% endblock %}
     <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" />
     {% if not user.is_authenticated or not user.is_staff %}
@@ -78,32 +78,13 @@
   </head>
   <body>
     <div id="wrap">
-      <div id="aside">
-        <a href="/"><img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img></a>
-        <hr class="med"></hr>
-{% markdown %}
-
-I'm Ben! I'm a junior at Harvard studying math and computer science. When I'm
-not doing that, I enjoy [making things][], [coding][], reading,
-playing piano, [singing][], [contra dancing][], hiking, [effective
-altruism][], and other strange activities.
-
-[making things]:/projects/
-[coding]:http://github.com/benskuhn/
-[singing]:http://www.harvardgleeclub.org/
-[contra dancing]:http://en.wikipedia.org/wiki/Contra_dance
-[effective altruism]:https://en.wikipedia.org/wiki/Effective_altruism
-
-{% endmarkdown %}
-        <hr class="med"></hr>
+      <div id="main" class="centerpage">
+        <h1 class="title">{{ title|quotify|safe }}</h1>
         <p class="nav">
           <a href="/">home</a> &bull;
           <a href="/about/">about</a> &bull;
           <a href="/contact/">contact</a>
         </p>
-      </div>
-      <div id="main" class="centerpage">
-        <h1 class="title">{{ title|quotify|safe }}</h1>
         <hr class="wide"></hr>
         {% block content %}content goes here{% endblock %}
         <hr class="wide"></hr>

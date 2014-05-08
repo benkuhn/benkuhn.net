@@ -1,14 +1,12 @@
 {% load md %}
 {% if comment.spam and not user.is_staff %}
 {% else %}
-<hr class="med"></hr>
 <div class="comment" id="comment-{{ comment.id }}">
   <div class="comment-header">
-    <img class="avatar" src="{{ comment.email|gravatar }}?s=40&d=identicon"></img>
+    <img class="avatar" src="{{ comment.email|gravatar }}?s=50&d=identicon"></img>
     <p class="name">{{ comment.name }} {% if comment.spam %}<span class="spam">(spam)</span>{% endif %}</p>
     <p class="info">
-      on <a class="permalink" href="{{ comment.get_absolute_url}}">{{ comment.date|date:"l, F j" }}
-        at {{ comment.date|date:"g:i a" }}
+      <a class="permalink" href="{{ comment.get_absolute_url}}">{{ comment.date|date:"F j" }} at {{ comment.date|date:"g:i A" }}
       </a>
     </p>
   </div>

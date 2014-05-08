@@ -3,10 +3,53 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
 /***** begin actual CSS ******/
 /* fix lists */
-ol, ul, li {
+ol, ul {
     padding:0;
     margin-left:52px;/*keyed to p indent*/
 }
@@ -29,14 +72,11 @@ ul ul {
 ul ul ul {
     list-style: square;
 }
-li {
-    margin: 0;
-}
 
 /* side panel */
 .nav {
     text-align: center;
-    margin: 0;
+    margin: 8px 0 -10px 0;
     padding: 0;
     text-align: center;
 }
@@ -51,13 +91,9 @@ li {
 .nav li:first-child:before {
     content: "";
 }
-img.me {
-    /*float:left;*/
-    display: block;
-    margin-left:auto;
-    margin-top:25px;
-    margin-bottom:15px;
-    margin-right:auto;
+.me {
+    float: right;
+    margin: 0 20px 20px 20px;
     box-shadow:0px 0px 6px 0px #666;
 }
 #top-posts ul {
@@ -70,33 +106,29 @@ a {
     color:#14B;
 }
 a:hover {
-    text-decoration:underline;
+    border-bottom: 1px #58f solid;
 }
 a:visited {
     color:#108;
 }
+a:visited:hover {
+    border-bottom: 1px #43b solid;
+}
 h2 a {
     color: #222 !important;
 }
-p {
-    margin:8px 0;
+h2 a:hover {
+    border-bottom: 1px #444 solid !important;
 }
-.post > p, .comment-body > p {
-    text-indent:52px; /* keyed to avatar padding */
+p {
+    margin:14px 0;
 }
 blockquote {
     margin-right: 40px;
     margin-left: 57px;
-    border-left-width: 5px;
-    padding-left: 10px; /* keyed to avatar padding */
-    border-left-style: solid;
-    border-left-color:#ccc;
-}
-.info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
-    color:#666;
-}
-.tags {
-    text-indent: 0in !important;
+    border-left: 2px solid #ccc;
+    padding-left: 13px; /* keyed to avatar padding */
+    font-style: italic;
 }
 .abccredit {
     font-style: italic;
@@ -117,7 +149,6 @@ div.abcrendered {
 /* body */
 html {
     margin: 0;
-    border-top: solid 8px #333;
     color:#222;
 }
 * { box-sizing: border-box; }
@@ -129,8 +160,8 @@ body {
     width: 208px;
 }
 #main {
-    float: right;
-    width: 520px;
+    width: 760px;
+    margin: 0 auto;
 }
 footer {
     width: 100%;
@@ -154,11 +185,6 @@ hr {
     display: block;
 }
 .footnote ol {
-}
-
-#wrap {
-    margin: 0 auto;
-    width: 748px;
 }
 
 /* comments */
@@ -234,7 +260,7 @@ form {
     margin: 0;
 }
 .comments {
-    /*margin: 0 20px;*/
+    margin: 0 20px;
 }
 .subscribe {
     font-style: italic;
@@ -246,16 +272,25 @@ form {
     width: 29%;
 }
 .nope {
+    /* for honeypots */
     width: 0 !important;
     height: 0 !important;
     border: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
 }
+h1 {
+    margin:0 auto;
+}
+#calendar-iframe {
+    border: 0;
+    margin: 10px 0;
+}
 
 /* fonts */
 html {
-    font-family: 'Georgia', serif;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 300;
 }
 h1.title {
     font-size: 40px;
@@ -265,21 +300,39 @@ h1, h2, h3, h4, h5 {
     line-height: 1.4em;
 }
 h1 {
-    font-size: 30pt;
+    font-size: 2.8em;
+    font-weight: 300;
 }
 h2 {
-    font-size: 22pt;
+    font-size: 1.8em;
+    margin: 30px 0 10px 0;
+    font-weight: 700;
 }
-
+h3 {
+    font-size: 1em;
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+}
+code {
+    font-family: "Inconsolata", monospace;
+}
+.info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
+    color:#666;
+}
+.tags.compact {
+    float: right;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.tags {
+    margin: 0;
+    text-align: right;
+}
+div.post {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
 p, li {
-    font-size: 16px;
-    line-height: 165%;
-}
-h1, h2 {
-    font-weight: 400;
-    margin:0 auto;
-}
-#calendar-iframe {
-    border: 0;
-    margin: 10px 0;
+    font-size: 1em;
+    line-height: 180%;
 }
