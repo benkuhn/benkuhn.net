@@ -74,7 +74,7 @@ class UrlizeExtension(markdown.Extension):
 
 
 unsafe_parser = markdown.Markdown(
-    extensions=[Texer(), 'tables', 'footnotes', 'smartypants', 'toc'])
+    extensions=[Texer(), 'tables', 'footnotes', 'smartypants', 'toc(title=Contents)'])
 safe_parser = markdown.Markdown(
     safe_mode='escape',
     extensions=['smartypants', Nofollow(), Texer(), UrlizeExtension()])

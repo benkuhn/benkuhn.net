@@ -46,6 +46,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
 
 /***** begin actual CSS ******/
 /* fix lists */
@@ -57,10 +65,10 @@ ol {
     list-style: decimal;
 }
 ol ol {
-    list-style: lower-latin;
+    list-style: lower-roman;
 }
 ol ol ol {
-    list-style: lower-roman;
+    list-style: lower-latin;
 }
 
 ul {
@@ -307,9 +315,10 @@ h2 {
     font-size: 1.8em;
     margin: 40px 0 20px 0;
 }
-div.toc:before {
-    content: 'Contents';
-    font-size: 1.8em;
+
+/* table of contents */
+.toctitle {
+    font-size: 2em; /* h2 em divided by div.toc em */
     margin: 50px 0 25px 0;
     font-weight: 700;
     text-align: center;
@@ -322,14 +331,24 @@ div.toc a {
 div.toc a:hover {
     border-bottom: 1px solid #222;
 }
+div.toc {
+    margin: 0 1in;
+}
 div.toc ul {
     font-size: 0.9em;
-    margin: 0 1in;
-    list-style: decimal;
 }
 div.toc li {
     margin: 5px 0;
 }
+
+/* footnotes */
+div.footnote {
+    font-size: smaller;
+}
+div.footnote p, div.footnote li {
+    line-height: 140%;
+}
+
 h3 {
     font-size: 1em;
     margin: 20px 0 10px 0;
