@@ -1,25 +1,35 @@
 {% extends "base.html" %}
 {% load md %}
+
 {% block content %}
 
 {% markdown %}
-Communicating with people is hard because everyone seems to have a different way of using their various communication media. I've tried to document how I use mine here to help alleviate this problem.
 
-- The best way to reach me for most things is by [email](mailto:ben.s.kuhn@gmail.com). I don't get push notifications for email, but I check once a day in the evening, and usually respond within a day or two (though there's high variance during the academic year). I try to stay at inbox zero, so I rarely lose emails, but if I'm swamped, feel free to ping me after two days.[^boomerang]
+The best way to reach me for most things is by email at [<span class="email">ben(dot)s(dot)kuhn(at)gmail(dot)com</span>](mailto:ben(dot)s(dot)kuhn(at)gmail(dot)com).[^email] For more urgent things, you can text or call me.[^text] I don't like instant messages (e.g. Facebook or Google Hangouts)--I'll try to respond, but I'd prefer to use email, text or phone.[^ims]
+<script type="text/javascript">
+  function fixemail(s) {
+    return s.replace(/\\(dot\\)/g, '.').replace(/\\(at\\)/g, '@');
+  }
+  var e = $('.email');
+  console.log(e);
+  e.text(fixemail(e.text()));
+  var ee = e.parent();
+  ee.attr('href', fixemail(ee.attr('href')));
+</script>
 
-[^boomerang]:If you need a way to remember to ping people, I suggest [Boomerang](http://www.boomeranggmail.com/).
+[^email]: I don't get push notifications for email, but I check once a day in the evening, and usually respond within a day or two (though there's high variance during the academic year). I try to stay at inbox zero, so I rarely lose emails, but if I'm swamped, feel free to ping me after two days. If you need a way to remember to ping people, I suggest [Boomerang](http://www.boomeranggmail.com/).
 
-- Text messages generate an alert on my phone, so they're good for things that need faster turnaround than email. Unfortunately, I can't manage my texts as well as my email, so I'm also more likely to drop them if I don't respond quickly.
+[^text]: Text messages generate an alert on my phone, so they're good for things that need faster turnaround than email. Unfortunately, I can't manage my texts as well as my email, so I'm also more likely to drop them if I don't respond quickly.
 
-- My phone automatically silences itself during class, meetings, etc. (via [Agent](https://play.google.com/store/apps/details?id=com.tryagent)), so it's always okay to call me--if it disrupts anything, it's my fault. If you leave a message it will get transcribed by [Google Voice](https://www.google.com/voice) and emailed to me, so when I call you back I will have the gist of what you're talking about but may have lost some details in the transcription.
+    My phone automatically silences itself during class, meetings, etc. (via [Agent](https://play.google.com/store/apps/details?id=com.tryagent)), so it's always okay to call me--if it disrupts anything, it's my fault. If you leave a message it will get transcribed by [Google Voice](https://www.google.com/voice) and emailed to me, so when I call you back I will have the gist of what you're talking about but may have lost some details in the transcription.
 
-- Facebook messages, Google Hangouts messages, etc. are pretty much just bad. For synchronous communication, they're worse than phone because they're only text. For asynchronous communication, they're worse than SMS because they require me to keep track of more different inboxes. Plus, 
+[^ims]: For synchronous communication, they're worse than phone because they're text-only. For asynchronous communication, they're worse than SMS because they require me to keep track of more different inboxes.
 
-My schedule is high-entropy during the academic year, so I've embedded my calendar below. So if you'd like to chat, why don't you suggest your favorite non-busy time below?
+My schedule is high-entropy during the academic year, so I've embedded my calendar below. If you'd like to chat, why don't you suggest your favorite non-busy time below?
 
-<iframe id="calendar-iframe" src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ben.s.kuhn%40gmail.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="760" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe id="calendar-iframe" src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ben.s.kuhn%40gmail.com&amp;color=%2329527A&amp;ctz=America%2FLos_Angeles" style=" border-width:0 " width="760" height="600" frameborder="0" scrolling="no"></iframe>
 
-(Disclaimer: sometimes things come up, so the calendar isn't perfect. Also, note that all times are in EST.)
+(Disclaimer: sometimes things come up, so the calendar isn't perfect. Also, note that all times are in PST.)
 
 {% endmarkdown %}
 
