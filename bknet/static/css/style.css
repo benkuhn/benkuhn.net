@@ -137,14 +137,6 @@ blockquote {
 div.abcrendered {
     margin: 0 -50px -50px;
 }
-.title {
-    margin-top:20px;
-    margin-bottom:-2px;
-    text-align: center;
-}
-.post_title {
-    margin-top: 20px;
-}
 
 /* body */
 html {
@@ -175,6 +167,10 @@ hr {
     margin: 0;
     border: 0;
     display: none;
+}
+.xwide {
+    margin: 40px 0;
+    display: block;
 }
 .wide {
     margin: 25px 0;
@@ -290,31 +286,58 @@ h1 {
 /* fonts */
 html {
     font-family: 'Merriweather', Georgia, serif;
-    font-weight: 300;
+    font-weight: 400;
 }
 h1.title {
     font-size: 40px;
     line-height: 1.2em;
+    margin-top: 50px;
+    margin-bottom:-2px;
+    text-align: center;
 }
 h1, h2, h3, h4, h5 {
     line-height: 1.4em;
+    font-family: Lato;
+    font-weight: 900;
+}
+.post_title {
+    margin-top: 20px;
 }
 h1 {
     font-size: 2.8em;
-    font-weight: 300;
+    font-weight: 400;
 }
 h2 {
     font-size: 1.8em;
-    margin: 30px 0 10px 0;
-    font-weight: 700;
+    margin: 40px 0 20px 0;
+}
+div.toc:before {
+    content: 'Contents';
+    font-size: 1.8em;
+    margin: 50px 0 25px 0;
+    font-weight: 900;
+    text-align: center;
+    display: block;
+    font-family: Lato;
+}
+div.toc a {
+    color: #222;
+    border-bottom: 1px dotted #222;
+}
+div.toc a:hover {
+    border-bottom: 1px solid #222;
+}
+div.toc ul {
+    font-size: 0.9em;
+    margin: 0 1in;
+}
+div.toc li {
+    margin: 5px 0;
 }
 h3 {
     font-size: 1em;
     font-weight: 700;
     margin: 20px 0 10px 0;
-}
-code {
-    font-family: "Inconsolata", monospace;
 }
 .info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
     color:#666;
@@ -335,4 +358,13 @@ div.post {
 p, li {
     font-size: 1em;
     line-height: 180%;
+}
+code {
+    font-family: "Inconsolata", monospace;
+}
+em {
+    font-style: italic;
+}
+strong {
+    font-weight: 700;
 }
