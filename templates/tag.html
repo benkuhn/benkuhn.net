@@ -5,8 +5,11 @@
 {% include "post_list.html" %}
 
 {% block pagenav %}
-<p>{% if posts.has_previous %}<a href="{{ page_root }}/{{ posts.previous_page_number }}/">newer</a>{% endif %}
-{% if posts.has_next %}<a href="{{ page_root }}/{{ posts.next_page_number }}/">older</a>{% endif %}</p>
+<p>
+  {% if posts.has_next %}<a class="left" href="{{ page_root }}/{{ posts.next_page_number }}/">older</a>{% endif %}
+  {% if posts.has_previous %}<a class="right" href="{{ page_root }}/{{ posts.previous_page_number }}/">newer</a>{% endif %}
+  <br clear="all">
+</p>
 {% endblock %}
 
 {% endblock %}
