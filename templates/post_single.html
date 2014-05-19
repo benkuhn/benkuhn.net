@@ -1,5 +1,7 @@
 {% load md %}
+
 {% if compact %}
+<div>
 <p class="tags{% if compact %} compact{% endif %}">
   <span class="post_date">
     {{ post.datePosted|date:"F j" }}
@@ -12,7 +14,9 @@
 <h2 class="post_title">
   <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
 </h2>
+</div>
 {% endif %}
+
 <div class="post">
 {% markdown %}
 {% if compact %}
@@ -22,27 +26,28 @@
 {% endif %}
 {% endmarkdown %}
 </div>
+
 {% if not compact %}
-<p class="subscribe">Enjoyed this post? Get notified of new ones via <a href="/email/">email</a> or <a href="/rss/">RSS.</a></p>
-<p class="comment-intro">
-  {% if not comment_count %}
-    no comments yet
-  {% else %}
-    <strong>{{ comment_count }} comment{{ comment_count|pluralize }}</strong>
-  {% endif %}
-  &bull; {% include "comment_show.html" with id="comment-form-top" %}
-</p>
-{% if comment_count %}<hr class="wide" />{% endif %}
-<div class="comments">
-{% include "comment_form.html" with id="comment-form-top" %}
-{% for comment in comments %}
-{% include "comment_single.html" %}
-{% if forloop.last %}
-<p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
-{% include "comment_form.html" with id="comment-form-bottom" %}
-{% else %}
-<hr class="med" />
-{% endif %}
-{% endfor %}
-</div>
+  <p class="subscribe">Enjoyed this post? Get notified of new ones via <a href="/email/">email</a> or <a href="/rss/">RSS.</a></p>
+  <p class="comment-intro">
+    {% if not comment_count %}
+      no comments yet
+    {% else %}
+      <strong>{{ comment_count }} comment{{ comment_count|pluralize }}</strong>
+    {% endif %}
+    &bull; {% include "comment_show.html" with id="comment-form-top" %}
+  </p>
+  {% if comment_count %}<hr class="wide" />{% endif %}
+  <div class="comments">
+  {% include "comment_form.html" with id="comment-form-top" %}
+  {% for comment in comments %}
+    {% include "comment_single.html" %}
+    {% if forloop.last %}
+      <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
+      {% include "comment_form.html" with id="comment-form-bottom" %}
+    {% else %}
+      <hr class="med" />
+    {% endif %}
+  {% endfor %}
+  </div>
 {% endif %}

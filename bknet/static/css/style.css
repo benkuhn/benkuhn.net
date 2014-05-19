@@ -297,11 +297,7 @@ h1.title {
 }
 h1, h2, h3, h4, h5 {
     line-height: 1.4em;
-    font-family: Lato;
-    font-weight: 900;
-}
-.post_title {
-    margin-top: 20px;
+    font-weight: 700;
 }
 h1 {
     font-size: 2.8em;
@@ -315,10 +311,9 @@ div.toc:before {
     content: 'Contents';
     font-size: 1.8em;
     margin: 50px 0 25px 0;
-    font-weight: 900;
+    font-weight: 700;
     text-align: center;
     display: block;
-    font-family: Lato;
 }
 div.toc a {
     color: #222;
@@ -330,13 +325,13 @@ div.toc a:hover {
 div.toc ul {
     font-size: 0.9em;
     margin: 0 1in;
+    list-style: decimal;
 }
 div.toc li {
     margin: 5px 0;
 }
 h3 {
     font-size: 1em;
-    font-weight: 700;
     margin: 20px 0 10px 0;
 }
 .info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
@@ -344,8 +339,7 @@ h3 {
 }
 .tags.compact {
     float: right;
-    margin-top: 10px;
-    margin-left: 20px;
+    padding-top: 10px;
 }
 .tags {
     margin: 0;
