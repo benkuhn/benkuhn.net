@@ -111,13 +111,13 @@ ul ul ul {
 /* text */
 a {
     text-decoration:none;
-    color:#14B;
+    color:#25c;
 }
 a:hover {
     border-bottom: 1px #58f solid;
 }
 a:visited {
-    color:#108;
+    color:#219;
 }
 a:visited:hover {
     border-bottom: 1px #43b solid;
