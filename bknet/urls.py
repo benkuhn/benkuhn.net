@@ -21,8 +21,9 @@ pset = [
     url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub'),
     url(r'^preview/$', 'posts.views.preview'),
     url(r'^.well-known/keybase.txt$', 'bknet.views.keybase'),
+    url(r'^bestof/$', 'django.views.generic.simple.redirect_to', {'url': '/more/'}),
     ]
-for name in ['contact', 'projects', 'privacy', 'about', 'bestof']:
+for name in ['contact', 'projects', 'privacy', 'about', 'more']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
 
 urlpatterns = patterns('', *pset

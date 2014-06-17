@@ -17,8 +17,8 @@ def privacy(request):
 def about(request):
     return render(request, 'about.html', { 'title': 'about' })
 
-def bestof(request):
-    return render(request, 'bestof.html', { 'title': 'best of' })
+def more(request):
+    return render(request, 'bestof.html', { 'title': 'read more' })
 
 def keybase(request):
     return render(request, 'keybase.txt', content_type='text/plain')

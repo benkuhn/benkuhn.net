@@ -24,7 +24,7 @@ class InlineMath(Pattern):
         Pattern.__init__(self, r'((?P<display>\$\$[^\s](.*?[^\s])??\$\$)|\$(?P<inline>[^\s](.*?[^\s])??)\$(?=[^\d]|$))', markdown_instance=markdown)
     def argh(self, s):
         s = self.unescape(s)
-        repls = (('92',  r'\\\\'),
+        repls = (('92', r'\\\\'),
                  ('123', r'\\{'),
                  ('125', r'\\}'))
         for needle, sub in repls:
