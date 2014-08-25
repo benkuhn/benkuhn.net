@@ -22,6 +22,10 @@
 {% if compact %}
 {{ post.excerpt|safe }}
 {% else %}
+{% if user.is_authenticated and user.is_staff %}
+<a href="{{ post.get_edit_url }}">(edit)</a>
+<a href="{{ post.get_sendmail_url }}">(sendmail)</a>
+{% endif %}
 {{ post.text|safe }}
 {% endif %}
 {% endmarkdown %}
