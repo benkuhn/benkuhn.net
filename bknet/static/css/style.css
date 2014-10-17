@@ -108,6 +108,13 @@ ul ul ul {
     margin: 0 0 0 2em;
 }
 
+/* homepage columns */
+.home-cat {
+    float: left;
+    width: 30%;
+    margin-right: 3%;
+}
+
 /* text */
 a {
     text-decoration:none;
@@ -359,6 +366,10 @@ h3 {
 .tags.compact {
     float: right;
     padding-top: 10px;
+}
+.tags.column {
+    text-align: left;
+    display: inline;
 }
 .tags {
     margin: 0;

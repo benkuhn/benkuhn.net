@@ -249,9 +249,9 @@ def tag(request, slug=None, page=None, title=None):
                                          'title':title,
                                          'page_root':page_root })
 
-# /archive/<page>/
-def archive(request, page=None):
-    return tag(request, slug=None, page=page, title='archive')
+# /blog/<page>/
+def blog(request, page=None):
+    return tag(request, slug=None, page=page, title='blog')
 
 # fills in the appropriate getters for an RSS feed
 class RssFeed(Feed):

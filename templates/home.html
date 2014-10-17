@@ -2,6 +2,38 @@
 {% load md %}
 {% block content %}
 
-{% include "post_list.html" %}
+<img src="{{ STATIC_PREFIX }}img/me_small.jpg" class="me"></img>
+
+{% markdown %}
+
+I'm Ben! I live in Berkely and work as Principal Technologist at Theorem, a financial technology startup, where I design and implement machine learning models, and ways to make such models more robust and trustworthy. When I'm not doing that, I also enjoy reading, [making music][], [contra dancing][], hiking, [effective altruism][], working on various [projects][], and many other strange activities.
+
+Sometimes I write things:
+
+[making music]:https://soundcloud.com/benskuhn/
+[coding]:http://github.com/benkuhn/
+[contra dancing]:http://en.wikipedia.org/wiki/Contra_dance
+[effective altruism]:http://effectivealtruism.org/
+[projects]:/projects/
+
+{% endmarkdown %}
+
+{% for cat in homepage_cats %}
+<div class="home-cat">
+  <h2>
+    <a href="{{ cat.tag.get_absolute_url }}">{{cat.tag.name}}</a>
+  </h2>
+  {% for post in cat.posts %}
+  <h3 class="post_title">
+    <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
+  </h3>
+  <span class="tags column post_date">
+    {{ post.datePosted|date:"F j" }}
+  </span>
+  {% endfor %}
+</div>
+{% endfor %}
+
+<br clear="all" />
 
 {% endblock %}

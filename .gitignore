@@ -1,3 +1,5 @@
 *.pyc
 *~
+*.sql
+*.json
 db.sqlite

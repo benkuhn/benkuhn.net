@@ -3,7 +3,16 @@ from posts.models import Post, Tag
 from posts.views import tag
 
 def home(request):
-    return tag(request, title='Ben Kuhn')
+    cat_names = ["tech", "effective-altruism", "misc"]
+    cats = []
+    for cat_name in cat_names:
+        tag = Tag.objects.get(slug=cat_name)
+        posts = tag.posts.filter(state=Post.PUBLISHED).order_by('-datePosted')[:5]
+        cats.append({'tag':tag, 'posts':posts})
+    return render(request, 'home.html', {
+        'title': 'Ben Kuhn',
+        'homepage_cats': cats
+    })
 
 def contact(request):
     return render(request, 'contact.html', { 'title':'contact' })
