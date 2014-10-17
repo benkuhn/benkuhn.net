@@ -41,17 +41,16 @@
     {% endif %}
     &bull; {% include "comment_show.html" with id="comment-form-top" %}
   </p>
-  {% if comment_count %}<hr class="wide" />{% endif %}
   <div class="comments">
   {% include "comment_form.html" with id="comment-form-top" %}
   {% for comment in comments %}
-    {% include "comment_single.html" %}
-    {% if forloop.last %}
-      <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
-      {% include "comment_form.html" with id="comment-form-bottom" %}
+    {% if comment.spam and not user.is_staff %}
     {% else %}
-      <hr class="med" />
+    <hr class="med" />
+    {% include "comment_single.html" %}
     {% endif %}
   {% endfor %}
+  <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
+  {% include "comment_form.html" with id="comment-form-bottom" %}
   </div>
 {% endif %}
