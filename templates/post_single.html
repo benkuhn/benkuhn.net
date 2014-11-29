@@ -1,37 +1,39 @@
 {% load md %}
 
 {% if compact %}
-<div>
-<p class="tags{% if compact %} compact{% endif %}">
-  <span class="post_date">
-    {{ post.datePosted|date:"F j" }}
-  </span>
+  <div>
+  <p class="tags{% if compact %} compact{% endif %}">
+    <span class="post_date">
+      {{ post.datePosted|date:"F j" }}
+    </span>
+    {% if user.is_authenticated and user.is_staff %}
+    <a href="{{ post.get_edit_url }}">(edit)</a>
+    <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
+    {% endif %}
+  </p>
+  <h2 class="post_title">
+    <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
+  </h2>
+  </div>
+  <div class="post">
+    {% markdown %}{{ post.excerpt|safe }}{% endmarkdown %}
+  </div>
+{% else %}
   {% if user.is_authenticated and user.is_staff %}
+  <p>
   <a href="{{ post.get_edit_url }}">(edit)</a>
   <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
+  <a href="#" class="right" id="save-button">(save and preview)</a>
+  </p>
+  <div id="edit_div">
+    <textarea id="post_editor">{{ post.text|safe }}</textarea>
+  </div>
   {% endif %}
-</p>
-<h2 class="post_title">
-  <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
-</h2>
-</div>
-{% endif %}
-
-<div class="post">
-{% markdown %}
-{% if compact %}
-{{ post.excerpt|safe }}
-{% else %}
-{% if user.is_authenticated and user.is_staff %}
-<a href="{{ post.get_edit_url }}">(edit)</a>
-<a href="{{ post.get_sendmail_url }}">(sendmail)</a>
-{% endif %}
-{{ post.text|safe }}
-{% endif %}
-{% endmarkdown %}
-</div>
-
-{% if not compact %}
+  
+  <div class="post">
+  {% markdown %}{{ post.text|safe }}{% endmarkdown %}
+  </div>
+  
   <p class="subscribe">Enjoyed this post? Get notified of new ones via <a href="/email/">email</a> or <a href="/rss/">RSS.</a></p>
   <p class="comment-intro">
     {% if not comment_count %}

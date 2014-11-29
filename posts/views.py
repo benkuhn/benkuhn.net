@@ -34,6 +34,19 @@ def by_slug(request, slug=''):
                                           'comments':comments,
                                           'comment_count':comment_count})
 
+# /edit/<slug>
+# Update the text of post <slug>
+def edit_by_slug(request, slug=''):
+    if request.method != 'POST':
+        raise Http404
+    editable = request.user.is_authenticated() and request.user.is_staff
+    if not editable:
+        raise Http404
+    post = get_object_or_404(Post, slug=slug)
+    post.text = request.POST['text']
+    post.save()
+    return render(request, 'edit_response.html', { 'post': post })
+
 # /sendmail/<slug>
 # send updates for a newly-published post
 def send_emails(request, slug=''):

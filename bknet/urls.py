@@ -16,6 +16,7 @@ pset = [
     url(r'^unsub/(?P<email>.+)$', 'posts.views.global_unsub'),
     url(r'^blog/(?P<page>\d+)/$', 'posts.views.blog'),
     url(r'^(?P<slug>[\w-]+)$', 'posts.views.by_slug'),
+    url(r'^edit/(?P<slug>[\w-]+)$', 'posts.views.edit_by_slug'),
     url(r'^sendmail/(?P<slug>[\w-]+)$', 'posts.views.send_emails'),
     url(r'^q/$', 'posts.views.queue'),
     url(r'^unsub/(?P<slug>[\w-]+)/(?P<email>.+)$', 'posts.views.unsub'),

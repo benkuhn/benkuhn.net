@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 {% load md %}
 {% block extra_meta %}
-<meta property="og:description" content="{{ post.excerpt|stripmd|safe }}"/>
+  <meta property="og:description" content="{{ post.excerpt|stripmd|safe }}"/>
 {% endblock %}
+
 {% block extra_head %}
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$[',']'], ['\\(','\\)']]}
-  });
-</script>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      tex2jax: {inlineMath: [['$[',']'], ['\\(','\\)']]}
+    });
+  </script>
+  {% if user.is_authenticated and user.is_staff %}
+  <script type="text/javascript" src="{{ STATIC_PREFIX }}js/edit.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}css/edit.min.css">
+  {% endif %}
 {% endblock %}
+
 {% block content %}
 {% include "post_single.html" with compact=False %}
 {% endblock %}

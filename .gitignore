@@ -3,3 +3,6 @@
 *.sql
 *.json
 db.sqlite
+bower_components
+node_modules
+.projectile
