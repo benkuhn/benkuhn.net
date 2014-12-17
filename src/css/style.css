@@ -153,6 +153,22 @@ div.abcrendered {
     margin: 0 -50px -50px;
 }
 
+/* table */
+td {
+    padding: 0 14px;
+}
+table {
+    margin: 0 auto;
+}
+th {
+    font-weight: 700;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+tbody > tr:first-child > td { /* TODO ugly selector */
+    padding-top: 8px;
+}
+
 /* body */
 html {
     margin: 0;
@@ -237,7 +253,7 @@ textarea {
 }
 .spam {
     color: #f00;
-    font-weight: normal;
+    font-weight: 400;
 }
 form {
     width: 100%;
@@ -253,7 +269,7 @@ form {
     outline: none;
 }
 .name {
-    font-weight: bold;
+    font-weight: 700;
     color: #222;
 }
 .number {
@@ -379,7 +395,7 @@ div.post {
     margin-top: 10px;
     margin-bottom: 20px;
 }
-p, li, textarea {
+p, li, textarea, td {
     font-size: 1em;
     line-height: 180%;
 }
