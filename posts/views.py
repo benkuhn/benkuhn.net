@@ -101,6 +101,8 @@ def do_comment(request, post, attrs, all_comments=None):
     # keyword parameter is for prefetching
     if all_comments is None:
         all_comments = list(post.comments.all())
+    else:
+        all_comments = all_comments[:] # copy so we don't mutate later
     ### create a new comment record
     comment = Comment()
     comment.post = post
@@ -110,7 +112,11 @@ def do_comment(request, post, attrs, all_comments=None):
     comment.text = attrs['text']
     comment.email = attrs['email']
     ### check for spam (requires a web request to Akismet)
-    comment.spam = akismet_check(request, comment)
+    is_spam = akismet_check(request, comment)
+    if is_spam:
+        return False # don't even save spam comments
+    comment.spam = False
+
     if isLegitEmail(comment.email):
         comment.subscribed = attrs.get('subscribed', False)
     else:
@@ -119,8 +125,6 @@ def do_comment(request, post, attrs, all_comments=None):
         comment.email = hashlib.sha1(comment.name.encode('utf-8')).hexdigest()
     comment.save()
     all_comments.append(comment)
-    if comment.spam:
-        return # don't email people for spam comments!
     ### send out notification emails
     emails = {}
     for c in all_comments:
@@ -139,6 +143,7 @@ def do_comment(request, post, attrs, all_comments=None):
         msg = EmailMessage(subject, text, "robot@benkuhn.net", [email])
         msg.content_subtype = 'html'
         msg.send()
+    return True
 
 # /unsub/<slug>/<email>
 # handle unsubscribe links from emails
