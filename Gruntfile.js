@@ -20,6 +20,7 @@ module.exports = function(grunt) {
             scripts: {
                 files: {
                     'bknet/static/js/main.min.js': [ 'bower_components/jquery/dist/jquery.js' ],
+                    'bknet/static/js/mathjax.min.js': [ 'src/js/mathjax.js' ],
                     'bknet/static/js/edit.min.js': [
                         'src/js/editor.js',
                         'bower_components/codemirror/lib/codemirror.js',
