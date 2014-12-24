@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% load md %}
+
+{% block extra_head %}
+  <script type="text/javascript" src="{{ STATIC_PREFIX }}js/mathjax.min.js">
+  </script>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+  </script>
+  {% if user.is_authenticated and user.is_staff %}
+  <script type="text/javascript" src="{{ STATIC_PREFIX }}js/edit.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}css/edit.min.css">
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
 {% for post in posts %}
