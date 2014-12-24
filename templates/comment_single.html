@@ -11,9 +11,9 @@
     </p>
   </div>
   <div class="comment-body">
-    {% usermarkdown %}
+    <span class="mathgroup">\(\begingroup\)</span>{% usermarkdown %}
 {{ comment.text|safe }}
-    {% endusermarkdown %}
+    {% endusermarkdown %}<span class="mathgroup">\(\endgroup\)</span>
   </div>
 </div>
 {% endif %}

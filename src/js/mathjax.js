@@ -62,9 +62,10 @@ var OPERATORS = [
 
 OPERATORS.map(function (obj) {
     var opname, optext;
-    if (Array.isArray(opname)) {
+    if (Array.isArray(obj)) {
         opname = obj[0];
         optext = obj[1];
+        console.log(opname, optext);
     }
     else {
         opname = optext = obj;
@@ -106,6 +107,7 @@ window.MathJax = {
     extensions: ["tex2jax.js"],
     tex2jax: {inlineMath: [['$[',']'], ['\\(','\\)']]},
     TeX: {
-        Macros: macros
+        Macros: macros,
+        extensions: ['begingroup.js'],
     }
 };

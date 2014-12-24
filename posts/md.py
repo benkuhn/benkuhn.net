@@ -47,18 +47,18 @@ class UrlizePattern(markdown.inlinepatterns.Pattern):
     """ Return a link Element given an autolink (`http://example/com`). """
     def handleMatch(self, m):
         url = m.group(2)
-        
+
         if url.startswith('<'):
             url = url[1:-1]
-            
+
         text = url
-        
+
         if not url.split('://')[0] in ('http','https','ftp'):
             if '@' in url and not '/' in url:
                 url = 'mailto:' + url
             else:
                 url = 'http://' + url
-    
+
         el = markdown.util.etree.Element("a")
         el.set('href', url)
         el.set('rel', 'nofollow')
@@ -74,7 +74,7 @@ class UrlizeExtension(markdown.Extension):
 
 
 unsafe_parser = markdown.Markdown(
-    extensions=[Texer(), 'tables', 'footnotes', 'smartypants', 'toc(title=Contents)'])
+    extensions=[Texer(), 'tables', 'footnotes(UNIQUE_IDS=True)', 'smartypants', 'toc(title=Contents)'])
 safe_parser = markdown.Markdown(
     safe_mode='escape',
     extensions=['smartypants', Nofollow(), Texer(), UrlizeExtension()])

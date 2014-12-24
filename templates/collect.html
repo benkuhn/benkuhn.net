@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load md %}
+{% block content %}
+
+{% for post in posts %}
+<h1>{{ post.title }}</h1>
+<p class="tags">
+  <span class="post_date"> {{ post.datePosted|date:"F j" }}</span>
+</p>
+<div class="post">
+  {% markdown %}{{ post.text|safe }}{% endmarkdown %}
+</div>
+{% if not forloop.last %}
+<hr class="med" />
+<br /><br /><br />
+{% endif %}
+{% endfor %}
+
+{% endblock %}

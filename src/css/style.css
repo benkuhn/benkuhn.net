@@ -215,6 +215,9 @@ hr {
 }
 
 /* comments */
+.mathgroup {
+    display: none;
+}
 input[type="text"], textarea {
     width: 100%;
     font: inherit;

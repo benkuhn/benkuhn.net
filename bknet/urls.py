@@ -23,6 +23,7 @@ pset = [
     url(r'^preview/$', 'posts.views.preview'),
     url(r'^.well-known/keybase.txt$', 'bknet.views.keybase'),
     url(r'^bestof/$', 'django.views.generic.simple.redirect_to', {'url': '/more/'}),
+    url(r'^collected/(?P<tags>[\w,-]*)$', 'posts.views.collect'),
     # redirects for compatibility reasons
     url(r'^archive/(?P<page>\d+)/$', 'django.views.generic.simple.redirect_to', {'url':'/blog/%(page)s/'}),
     ]
