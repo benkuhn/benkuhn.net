@@ -275,14 +275,34 @@ def blog(request, page=None):
 class RssFeed(Feed):
     title = "benkuhn.net"
     link = "/"
-    feed_url = "/rss/"
     author_name = "Ben Kuhn"
     description = "New posts on benkuhn.net."
     description_template = "rsspost.html"
     ttl = 5
 
-    def items(self):
-        return Post.objects.filter(state=Post.PUBLISHED).prefetch_related('tags').order_by('-datePosted')[:10]
+    def get_object(self, request, tag):
+        if len(tag) == 0:
+            return None
+        return get_object_or_404(Tag, slug=tag)
+
+    def title(self, tag):
+        # TODO this uses slugs instead of tag names. Use tag names.
+        if tag is None:
+            return 'benkuhn.net'
+        else:
+            return '%s posts at benkuhn.net' % tag.name
+
+    def feed_url(self, tag):
+        if tag is None:
+            return '/rss/'
+        else:
+            return '/rss/' + tag.slug
+
+    def items(self, tag):
+        filterargs = { 'state':Post.PUBLISHED }
+        if tag is not None:
+            filterargs['tags__slug'] = tag.slug
+        return Post.objects.filter(**filterargs).prefetch_related('tags').order_by('-datePosted')[:10]
 
     def item_title(self, post):
         return post.title

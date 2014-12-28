@@ -10,7 +10,7 @@ pset = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
     url(r'^tag/(?P<slug>[\w-]+)/(?P<page>\d+)/$', 'posts.views.tag'),
-    url(r'^rss/$', 'posts.views.rss'),
+    url(r'^rss/(?P<tag>[\w-]*)$', 'posts.views.rss'),
     url(r'^email/$', 'posts.views.email'),
     url(r'^subscribers/$', 'posts.views.subscribers'),
     url(r'^unsub/(?P<email>.+)$', 'posts.views.global_unsub'),
