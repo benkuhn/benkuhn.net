@@ -84,7 +84,7 @@ ul ul ul {
 /* side panel */
 .nav {
     text-align: center;
-    margin: 8px 0 -10px 0;
+    margin: 14px 0 -4px 0;
     padding: 0;
     text-align: center;
 }
@@ -119,15 +119,20 @@ ul ul ul {
 a {
     text-decoration:none;
     color:#25c;
+    border-bottom-style: dotted;
+    border-bottom-color: #58f;
+}
+/* links in paragraphs get a dotted underline for usability */
+p a {
+    border-bottom-width: 1px;
 }
 a:hover {
-    border-bottom: 1px #58f solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 a:visited {
     color:#219;
-}
-a:visited:hover {
-    border-bottom: 1px #43b solid;
+    border-bottom-color: #43b;
 }
 h2 a {
     color: #222 !important;
@@ -191,25 +196,37 @@ footer {
     text-align: center;
     padding-bottom: 25px;
 }
+
+/* hr's */
 hr {
+    border: 0;
+    margin: 0;
+}
+
+hr.xwide, hr.wide, hr.med {
     background: #ccc;
     width: 100%;
     height: 1px;
-    margin: 0;
-    border: 0;
-    display: none;
+    display: block;
 }
 .xwide {
     margin: 40px 0;
-    display: block;
 }
 .wide {
     margin: 25px 0;
-    display: block;
 }
 .med {
     margin: 10px 0;
+}
+.post hr {
     display: block;
+    text-align: center;
+    margin: 25px auto;
+}
+.post hr:after {
+    content: "\269c \a0\a0\a0\a0 \269c \a0\a0\a0\a0 \269c";
+    font-size: 1.6em;
+    color: #666;
 }
 .footnote ol {
 }
@@ -352,10 +369,8 @@ h2 {
 }
 div.toc a {
     color: #222;
-    border-bottom: 1px dotted #222;
-}
-div.toc a:hover {
-    border-bottom: 1px solid #222;
+    border-bottom-width: 1px;
+    border-bottom-color: #444;
 }
 div.toc {
     margin: 0 1in;
@@ -381,6 +396,9 @@ h3 {
 }
 .info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
     color:#666;
+}
+.info .permalink {
+    border-bottom-color: #999;
 }
 .tags.compact {
     float: right;
