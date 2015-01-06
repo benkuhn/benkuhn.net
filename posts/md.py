@@ -2,8 +2,8 @@ import markdown
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import Pattern
 from markdown.extensions import Extension
-import markdown
 import re
+import mdcite
 
 class Nofollow(Extension):
     def extendMarkdown(self, md, md_globals):
@@ -72,9 +72,9 @@ class UrlizeExtension(markdown.Extension):
         """ Replace autolink with UrlizePattern """
         md.inlinePatterns['autolink'] = UrlizePattern(URLIZE_RE, md)
 
-
 unsafe_parser = markdown.Markdown(
-    extensions=[Texer(), 'tables', 'footnotes(UNIQUE_IDS=True)', 'smartypants', 'toc(title=Contents)'])
+    extensions=[Texer(), 'tables', 'footnotes(UNIQUE_IDS=True)', 'smartypants', 'toc(title=Contents)',
+                mdcite.CitationExtension()])
 safe_parser = markdown.Markdown(
     safe_mode='escape',
     extensions=['smartypants', Nofollow(), Texer(), UrlizeExtension()])

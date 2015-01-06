@@ -389,6 +389,9 @@ div.footnote {
 div.footnote p, div.footnote li {
     line-height: 140%;
 }
+div.footnote hr {
+    display: none;
+}
 
 h3 {
     font-size: 1em;
