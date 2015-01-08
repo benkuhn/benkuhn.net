@@ -84,7 +84,7 @@ ul ul ul {
 /* side panel */
 .nav {
     text-align: center;
-    margin: 14px 0 -4px 0;
+    margin: 25px 0 -4px 0;
     padding: 0;
     text-align: center;
 }
@@ -341,9 +341,9 @@ html {
 }
 h1.title {
     font-size: 40px;
-    line-height: 1.2em;
-    margin-top: 50px;
-    margin-bottom:-2px;
+    line-height: 1.4em;
+    margin-top: 25px;
+    margin-bottom: 15px;
     text-align: center;
 }
 h1, h2, h3, h4, h5 {
@@ -393,6 +393,9 @@ div.footnote hr {
     display: none;
 }
 
+h2.cat-title {
+    margin-top: 20px;
+}
 h3 {
     font-size: 1.3em;
     margin: 20px 0 10px 0;
@@ -405,6 +408,13 @@ h3.post_title {
 }
 .info .permalink {
     border-bottom-color: #999;
+}
+.post_date_big {
+    color:#666;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
+    margin-top: -10px;
 }
 .tags.compact {
     float: right;

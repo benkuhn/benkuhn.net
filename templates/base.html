@@ -83,7 +83,6 @@
   <body>
     <div id="wrap">
       <div id="main" class="centerpage">
-        <h1 class="title">{{ title|quotify|safe }}</h1>
         <div class="nav">
           <a href="/">home</a> &bull;
           <a href="/about/">about</a> &bull;
@@ -91,7 +90,7 @@
           <a href="/more/">read more</a> &bull;
           <a href="/contact/">contact</a>
         </div>
-        <hr class="xwide"></hr>
+        <h1 class="title">{{ title|quotify|safe }}</h1>
         {% block content %}content goes here{% endblock %}
         <hr class="wide"></hr>
         <footer>

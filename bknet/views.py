@@ -10,7 +10,7 @@ def home(request):
         posts = tag.posts.filter(state=Post.PUBLISHED).order_by('-datePosted')[:5]
         cats.append({'tag':tag, 'posts':posts})
     return render(request, 'home.html', {
-        'title': 'Ben Kuhn',
+        'title': 'Hi!',
         'homepage_cats': cats
     })
 
