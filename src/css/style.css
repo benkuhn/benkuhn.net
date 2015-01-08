@@ -397,6 +397,9 @@ h3 {
     font-size: 1.3em;
     margin: 20px 0 10px 0;
 }
+h3.post_title {
+    font-size: 1em;
+}
 .info,.info .permalink,.info .permalink:visited,.abccredit,.tags,footer {
     color:#666;
 }
