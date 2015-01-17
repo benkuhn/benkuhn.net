@@ -14,6 +14,9 @@ def home(request):
         'homepage_cats': cats
     })
 
+def ea(request):
+    return render(request, 'ea.html', { 'title':'altruism' })
+
 def contact(request):
     return render(request, 'contact.html', { 'title':'contact' })
 

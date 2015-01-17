@@ -161,14 +161,21 @@ div.abcrendered {
 /* table */
 td {
     padding: 0 14px;
+    vertical-align: middle;
 }
 table {
     margin: 0 auto;
 }
 th {
     font-weight: 700;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #ccc;
+    padding: 10px 8px;
+    vertical-align: middle;
+}
+thead tr {
+    background-color: #eee;
+}
+tbody tr {
+    border-bottom: 1px dotted #ccc;
 }
 tbody > tr:first-child > td { /* TODO ugly selector */
     padding-top: 8px;
