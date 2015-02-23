@@ -73,7 +73,7 @@ class UrlizeExtension(markdown.Extension):
         md.inlinePatterns['autolink'] = UrlizePattern(URLIZE_RE, md)
 
 unsafe_parser = markdown.Markdown(
-    extensions=[Texer(), 'tables', 'footnotes(UNIQUE_IDS=True)', 'smartypants', 'toc(title=Contents)',
+    extensions=[Texer(), 'tables', 'footnotes', 'smartypants', 'toc(title=Contents)',
                 mdcite.CitationExtension()])
 safe_parser = markdown.Markdown(
     safe_mode='escape',

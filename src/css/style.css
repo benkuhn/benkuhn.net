@@ -121,6 +121,8 @@ a {
     color:#25c;
     border-bottom-style: dotted;
     border-bottom-color: #58f;
+    /* compensate for bottom border */
+    margin-bottom: -1px;
 }
 /* links in paragraphs get a dotted underline for usability */
 p a {
@@ -141,15 +143,29 @@ h2 a:hover {
     border-bottom: 1px #444 solid !important;
 }
 p {
-    margin:14px 0;
+    margin:10px 0;
 }
+/* blockquotes */
 blockquote {
     margin-right: 40px;
     margin-left: 57px;
     border-left: 2px solid #ccc;
     padding-left: 13px; /* keyed to avatar padding */
-    font-style: italic;
 }
+blockquote p {
+    font-size: 0.9em;
+    line-height: 135%;
+}
+/* footnotes */
+/* stop footnotes from messing with line-height */
+sup {
+    line-height: 0;
+}
+sup a {
+    /* align underline with normal text (TODO style better) */
+    padding-bottom: 7px;
+}
+/* ABC notation */
 .abccredit {
     font-style: italic;
     text-align: center;
@@ -195,7 +211,7 @@ body {
     width: 208px;
 }
 #main {
-    width: 760px;
+    width: 640px;
     margin: 0 auto;
 }
 footer {
@@ -260,7 +276,7 @@ label {
     float: right;
 }
 textarea {
-    height: 50px;
+    height: 150px;
     margin-top: 10px;
 }
 #preview-frame {
@@ -441,7 +457,7 @@ div.post {
 }
 p, li, textarea, td {
     font-size: 1em;
-    line-height: 180%;
+    line-height: 160%;
 }
 code {
     font-family: "Inconsolata", monospace;

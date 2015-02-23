@@ -6,13 +6,13 @@
   <div class="col2 right">
     <input type="text" class="field" name="email" placeholder="email (optional)"></input>
   </div>
-  <input type="text" placeholder="John Doe" class="nope" name="lastname" autocomplete="off" />
+  <input type="text" placeholder="John Doe" class="nope" name="lastname" autocomplete="off" tabindex="-1" />
   <textarea id="{{id}}-comment" class="field" name="text" placeholder="comment (not optional)"></textarea>
   <div class="right submit">
-    <a class="right clicky"
-    onclick="javascript:$.ajax('/preview/',{type:'POST',data:{text:$('#{{id}}-comment').val()},success:function (data) {console.log(data);$('#{{id}}-preview').empty().append(data); MathJax.Hub.Queue(['Typeset',MathJax.Hub, $('#{{id}}-preview')[0]]);}});">preview</a><br/>
-    <a class="right clicky"
-    onclick="javascript:document.getElementById('{{ id }}').submit()">submit</a><br/>
+    <a class="right clicky" href="#"
+    onclick="javascript:$.ajax('/preview/',{type:'POST',data:{text:$('#{{id}}-comment').val()},success:function (data) {console.log(data);$('#{{id}}-preview').empty().append(data); MathJax.Hub.Queue(['Typeset',MathJax.Hub, $('#{{id}}-preview')[0]]);}}); return false">preview</a><br/>
+    <a class="right clicky" href="#"
+    onclick="javascript:document.getElementById('{{ id }}').submit(); return false">submit</a><br/>
     <span class="right info"><input type="checkbox" name="subscribed" value="subscribed" checked="checked"></input> subscribe</span>
   </div>
   <span class="submit info">format posts
