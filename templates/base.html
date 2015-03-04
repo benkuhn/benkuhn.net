@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta property="og:title" content="{{ title }}" />
     <meta property="og:site_name" content="benkuhn.net" />
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i|Inconsolata:400,700|Lato:400,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i|Inconsolata:400,700|Merriweather Sans:400,700' rel='stylesheet' type='text/css'>
     {% block extra_meta %}{% endblock %}
     
     {% if not user.is_authenticated or not user.is_staff %}
@@ -90,7 +90,7 @@
           <a href="/more/">read more</a> &bull;
           <a href="/contact/">contact</a>
         </div>
-        <h1 class="title">{{ title|quotify|safe }}</h1>
+        <h1 class="title">{{ title|titlify|safe }}</h1>
         {% block content %}content goes here{% endblock %}
         <hr class="wide"></hr>
         <footer>

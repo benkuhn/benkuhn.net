@@ -39,6 +39,19 @@ def quotify(string):
         string = regex.sub(sub, string)
     return string
 
+spaces = re.compile('\s+')
+@register.filter(name='deorphan')
+def deorphan(string):
+    split = spaces.split(string)
+    if len(split) < 3:
+        return string
+    last2 = '&nbsp;'.join(split[-2:])
+    return ' '.join(split[:-2] + [last2])
+
+@register.filter(name='titlify')
+def titlify(string):
+    return deorphan(quotify(string))
+
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):
         self.nodelist = nodelist

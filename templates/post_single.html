@@ -2,29 +2,32 @@
 
 {% if compact %}
   <div>
-  <p class="tags{% if compact %} compact{% endif %}">
-    <span class="post_date">
-      {{ post.datePosted|date:"F j" }}
-    </span>
-    {% if user.is_authenticated and user.is_staff %}
-    <a href="{{ post.get_edit_url }}">(edit)</a>
-    <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
-    {% endif %}
-  </p>
-  <h2 class="post_title">
-    <a href="{{ post.get_absolute_url }}">{{ post.title|quotify|safe }}</a>
-  </h2>
+    <h2 class="post_title">
+      <a href="{{ post.get_absolute_url }}">{{ post.title|titlify|safe }}</a>
+    </h2>
+    <p class="tags">
+      {% for tag in post.tags.all %}
+      <a href="/tag/{{tag.slug}}/1/">{{tag.name}}</a>
+      {% endfor %}
+      &bull;
+      <span class="post_date">
+        {{ post.datePosted|date:"F j" }}
+      </span>
+      {% if user.is_authenticated and user.is_staff %}
+      <a href="{{ post.get_edit_url }}">(edit)</a>
+      <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
+      {% endif %}
+    </p>
   </div>
   <div class="post">
     {% markdown %}{{ post.excerpt|safe }}{% endmarkdown %}
   </div>
 {% else %}
-  <p class="post_date_big">{{ post.datePosted|date:"F j, Y" }}</p>
   {% if user.is_authenticated and user.is_staff %}
   <p>
-  <a href="{{ post.get_edit_url }}">(edit)</a>
-  <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
-  <a href="#" class="right" id="save-button">(save and preview)</a>
+    <a href="{{ post.get_edit_url }}">(edit)</a>
+    <a href="{{ post.get_sendmail_url }}">(sendmail)</a>
+    <a href="#" class="right" id="save-button">(save and preview)</a>
   </p>
   <div id="edit_div">
     <textarea id="post_editor">{{ post.text|safe }}</textarea>
@@ -32,10 +35,17 @@
   {% endif %}
   
   <div class="post">
-  {% markdown %}{{ post.text|safe }}{% endmarkdown %}
+    {% markdown %}{{ post.text|safe }}{% endmarkdown %}
+    <p class="post_date_big">
+      &mdash;{{ post.datePosted|date:"F Y" }}
+    </p>
   </div>
+
+  <p class="subscribe">
+    Enjoyed this post? Get notified of new ones via
+    <a href="/email/">email</a> or <a href="/rss/">RSS.</a>
+  </p>
   
-  <p class="subscribe">Enjoyed this post? Get notified of new ones via <a href="/email/">email</a> or <a href="/rss/">RSS.</a></p>
   <p class="comment-intro">
     {% if not comment_count %}
       no comments yet
@@ -45,15 +55,17 @@
     &bull; {% include "comment_show.html" with id="comment-form-top" %}
   </p>
   <div class="comments">
-  {% include "comment_form.html" with id="comment-form-top" %}
-  {% for comment in comments %}
-    {% if comment.spam and not user.is_staff %}
-    {% else %}
-    <hr class="med" />
-    {% include "comment_single.html" %}
+    {% include "comment_form.html" with id="comment-form-top" %}
+    {% for comment in comments %}
+      {% if comment.spam and not user.is_staff %}
+      {% else %}
+      <hr class="med" />
+      {% include "comment_single.html" %}
+      {% endif %}
+    {% endfor %}
+    {% if comment_count %}
+    <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
+    {% include "comment_form.html" with id="comment-form-bottom" %}
     {% endif %}
-  {% endfor %}
-  <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
-  {% include "comment_form.html" with id="comment-form-bottom" %}
   </div>
 {% endif %}

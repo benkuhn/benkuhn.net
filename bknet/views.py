@@ -3,15 +3,20 @@ from posts.models import Post, Tag
 from posts.views import tag
 
 def home(request):
+    '''
     cat_names = ["tech", "effective-altruism", "misc"]
     cats = []
     for cat_name in cat_names:
         tag = Tag.objects.get(slug=cat_name)
         posts = tag.posts.filter(state=Post.PUBLISHED).order_by('-datePosted')[:5]
         cats.append({'tag':tag, 'posts':posts})
+    '''
+    posts = (Post.objects.prefetch_related('tags').filter(state=Post.PUBLISHED)
+             .order_by('-datePosted')[:5])
     return render(request, 'home.html', {
         'title': 'Hi!',
-        'homepage_cats': cats
+        'posts': posts
+        #'homepage_cats': cats
     })
 
 def ea(request):

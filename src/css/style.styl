@@ -1,0 +1,467 @@
+body_color = #222
+light_text = #666
+shadow_color = #666
+accent_color = #ccc
+light_background = #eee
+a_color = #25c
+a_visited_color = #419
+sans_font = 'Merriweather Sans', Arial, sans-serif
+serif_font = 'Merriweather', Georgia, serif
+indent_amount = 52px
+
+////////////////////////////////////////////////////////////////////////////////
+// lists
+////////////////////////////////////////////////////////////////////////////////
+ol, ul {
+    padding:0;
+    margin-left: indent_amount;
+}
+ol {
+    list-style: decimal;
+}
+ol ol {
+    list-style: lower-roman;
+}
+ol ol ol {
+    list-style: lower-latin;
+}
+
+ul {
+    list-style: disc;
+}
+ul ul {
+    list-style: circle;
+}
+ul ul ul {
+    list-style: square;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// top navigation
+////////////////////////////////////////////////////////////////////////////////
+.nav {
+    text-align: center;
+    margin: 25px 0 -4px 0;
+    padding: 0;
+    text-align: center;
+}
+.nav li {
+    list-style: none;
+    display: inline;
+    margin: 0;
+}
+.nav li:before {
+    content: "~ ";
+}
+.nav li:first-child:before {
+    content: "";
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// homepage
+////////////////////////////////////////////////////////////////////////////////
+.me {
+    float: right;
+    margin: 0 20px 20px 20px;
+    box-shadow:0px 0px 6px 0px shadow_color;
+}
+// columns
+.home-cat {
+    float: left;
+    width: 30%;
+    margin-right: 3%;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// typography
+////////////////////////////////////////////////////////////////////////////////
+// Basics
+html {
+    font-family: serif_font;
+    font-weight: 400;
+}
+p, li, textarea, td {
+    font-size: 1em;
+    line-height: 160%;
+}
+code {
+    font-family: "Inconsolata", monospace;
+    white-space: pre;
+}
+em {
+    font-style: italic;
+}
+strong {
+    font-weight: 700;
+}
+
+uppercase_sans() {
+    font-family: sans_font;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+uppercase_serif() {
+    font-family: serif_font;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+// Headers
+h1.title {
+    font-size: 35px;
+    line-height: 1.4em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+h1 {
+    font-size: 2.8em;
+    font-weight: 400;
+    margin:0 auto;
+}
+h2, .toctitle {
+    font-family: sans_font;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 30px 0 15px 0;
+}
+h2.cat-title {
+    margin-top: 20px;
+}
+h3 {
+    uppercase_sans();
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+}
+h3.post_title {
+    font-size: 1em;
+}
+
+h4 {
+    uppercase_serif();
+    font-weight: 700;
+    margin: 15px 0 10px 0;
+}
+
+// metadata
+.info, .info .permalink,.info .permalink:visited, .tags, footer {
+    color: light_text;
+    border-bottom-color: light_text + #222;
+}
+.post_date_big {
+    color: light_text;
+    text-align: right;
+    font-style: italic;
+}
+.tags {
+    uppercase_sans();
+    font-size: 0.75em;
+    margin-top: -10px;
+}
+.tags a {
+    border-bottom: 0;
+}
+div.post {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+// navigation
+.nav {
+    uppercase_sans();
+    font-size: 0.75em;
+}
+
+// links
+a {
+    text-decoration:none;
+    color: a_color;
+    border-bottom-style: dotted;
+    border-bottom-color: a_color + #222;
+    /* compensate for bottom border */
+    margin-bottom: -1px;
+}
+// links in paragraphs get a dotted underline for usability
+p a {
+    border-bottom-width: 1px;
+}
+a:hover {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+a:visited {
+    color: a_visited_color;
+    border-bottom-color: a_visited_color + #222;
+}
+h2 a {
+    color: body_color !important;
+}
+h2 a:hover {
+    border-bottom: 1px body_color + #222 solid !important;
+}
+p {
+    margin:10px 0;
+}
+// blockquotes
+blockquote {
+    margin-right: 40px;
+    margin-left: indent_amount - 15px;
+    border-left: 2px solid accent_color;
+    padding-left: 13px; /* keyed to avatar padding */
+}
+blockquote p {
+    font-size: 0.9em;
+    line-height: 135%;
+}
+// footnotes
+sup {
+    line-height: 0; // don't mess with line-height
+}
+sup a {
+    // align underline with normal text (TODO style better)
+    padding-bottom: 7px;
+}
+div.footnote {
+    font-size: smaller;
+}
+div.footnote p, div.footnote li {
+    line-height: 140%;
+}
+div.footnote hr {
+    display: none;
+}
+
+// table of contents
+.toctitle {
+    margin: 50px 0 25px 0;
+    text-align: center;
+    display: block;
+}
+div.toc a {
+    color: body_color;
+    border-bottom-width: 1px;
+    border-bottom-color: body_color + #222;
+}
+div.toc {
+    margin: 0 1in;
+}
+div.toc > ul {
+    font-size: 0.9em;
+    //-webkit-column-count: 2;
+}
+div.toc ul {
+    margin-left: 20px;
+    //list-style: none !important;
+}
+div.toc li {
+    margin: 0 5px;
+}
+// images
+img {
+    /* Rather rescale than break columns */
+    max-width: 100%;
+}
+
+// code
+pre, code {
+    background-color: light_background;
+}
+pre {
+    margin-left: indent_amount - 5px;
+    margin-right: indent_amount - 5px;
+    padding: 5px;
+    border-top: 1px dotted shadow_color;
+    border-bottom: 1px dotted shadow_color;
+}
+code {
+    line-height: 0;
+    padding: 2px;
+}
+pre > code {
+    padding: 0;
+    line-height: 120%;
+}
+
+// tables
+td {
+    padding: 0 14px;
+    vertical-align: middle;
+}
+table {
+    margin: 0 auto;
+}
+th {
+    uppercase_serif();
+    font-size: 0.9em;
+    font-weight: 700;
+    padding: 10px 8px;
+    vertical-align: middle;
+}
+thead tr {
+    background-color: light_background;
+}
+tbody tr {
+    border-bottom: 1px dotted accent_color;
+}
+tbody > tr:first-child > td { /* TODO ugly selector */
+    padding-top: 8px;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Layout
+////////////////////////////////////////////////////////////////////////////////
+html {
+    margin: 0;
+    color: body_color;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+}
+#aside {
+    float: left;
+    width: 208px;
+}
+#main {
+    width: 640px;
+    margin: 0 auto;
+}
+footer {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+// hr's
+hr {
+    border: 0;
+    margin: 0;
+}
+
+hr.xwide, hr.wide, hr.med {
+    background: accent_color;
+    width: 100%;
+    height: 1px;
+    display: block;
+}
+.xwide {
+    margin: 40px 0;
+}
+.wide {
+    margin: 25px 0;
+}
+.med {
+    margin: 10px 0;
+}
+.post hr {
+    display: block;
+    text-align: center;
+    margin: 25px auto;
+}
+.post hr:after {
+    content: "\2042";
+    font-size: 1em;
+    color: body_color;
+}
+.footnote ol {
+}
+
+// comments
+.mathgroup {
+    display: none;
+}
+input[type="text"], textarea {
+    width: 100%;
+    font: inherit;
+}
+label {
+    float: left;
+    padding: 5px 20px 5px 0;
+}
+.col2 {
+    width: 49%;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+textarea {
+    height: 150px;
+    margin-top: 10px;
+}
+#preview-frame {
+    border: 0;
+    width: 100%;
+}
+.submit {
+    padding: 5px 0;
+    display: block;
+}
+.submit.info {
+    width: 80%;
+}
+.clicky {
+    cursor: hand;
+    cursor: pointer;
+}
+.spam {
+    color: #f00;
+    font-weight: 400;
+}
+form {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.field {
+    border-bottom: 1px solid accent_color;
+    padding: 3px;
+    display: table-cell;
+}
+.field:focus {
+    outline: none;
+}
+.name {
+    font-weight: 700;
+    color: body_color;
+}
+.avatar {
+    float: left;
+    margin: 5px 9px 0px 3px;
+    box-shadow:0px 0px 4px 0px shadow_color;
+}
+.comment-header > p {
+    margin: 0;
+}
+.comments {
+    margin: 0 20px;
+}
+.subscribe {
+    font-style: italic;
+}
+#sub-text {
+    width: 69%;
+}
+#sub-button {
+    width: 29%;
+}
+.nope {
+    // for honeypots
+    width: 0 !important;
+    height: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+#calendar-iframe {
+    border: 0;
+    margin: 10px 0;
+}
+
+/* CodeMirror */
+.CodeMirror {
+    border: 1px solid black; 
+}
