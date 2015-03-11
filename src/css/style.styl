@@ -156,12 +156,14 @@ h4 {
     font-style: italic;
 }
 .tags {
-    uppercase_sans();
-    font-size: 0.75em;
     margin-top: -10px;
 }
-.tags a {
-    border-bottom: 0;
+.tags, .list_nav {
+    uppercase_sans();
+    font-size: 0.75em;
+    a {
+        border-bottom: 0;
+    }
 }
 div.post {
     margin-top: 10px;
@@ -210,6 +212,10 @@ blockquote {
     margin-left: indent_amount - 15px;
     border-left: 2px solid accent_color;
     padding-left: 13px; /* keyed to avatar padding */
+}
+blockquote blockquote {
+    // no ugly nesting here
+    margin-left: 2px;
 }
 blockquote p {
     font-size: 0.9em;
