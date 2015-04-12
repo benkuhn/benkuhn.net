@@ -35,7 +35,10 @@ def about(request):
     return render(request, 'about.html', { 'title': 'about' })
 
 def more(request):
-    return render(request, 'bestof.html', { 'title': 'read more' })
+    return render(request, 'bestof.html', { 'title': 'best of' })
+
+def follow(request):
+    return render(request, 'follow.html', { 'title': 'follow' })
 
 def keybase(request):
     return render(request, 'keybase.txt', content_type='text/plain')

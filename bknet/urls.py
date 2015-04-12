@@ -27,7 +27,7 @@ pset = [
     # redirects for compatibility reasons
     url(r'^archive/(?P<page>\d+)/$', 'django.views.generic.simple.redirect_to', {'url':'/blog/%(page)s/'}),
     ]
-for name in ['contact', 'projects', 'privacy', 'about', 'more', 'ea']:
+for name in ['contact', 'projects', 'privacy', 'about', 'more', 'ea', 'follow']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
 
 urlpatterns = patterns('', *pset
