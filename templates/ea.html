@@ -9,10 +9,139 @@ Effective altruism is the idea of using evidence and reason to find the best way
 
 I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which means I've [pledged](https://www.givingwhatwecan.org/pledge) to donate at least 10% of my income to charity. In fact, I try to be better than my word, and donate most of what I earn above a reasonable baseline. To be transparent, and to help [set a norm that inspires more people to give](http://www.jefftk.com/p/make-your-giving-public), I keep a log of my donations here.
 
-Date       | Organization            | Amount
------------|-------------------------|--------
-12/31/2014 | GiveWell (unrestricted) | $5,000
-
 {% endmarkdown %}
+
+<p>
+  View:
+  <input type="radio" name="view" value="chron" checked="true" onclick="chronView()">chronological
+  <input type="radio" name="view" value="org" onclick="orgView()">by organization
+</p>
+
+<table>
+  <thead>
+    <tr id="donations-header"></tr>
+  </thead>
+  <tbody id="donations-body">
+  </tbody>
+</table>
+
+<p>(I've also received numerous donations as gifts, but I don't include them here since I sometimes don't even know the amounts.)</p>
+
+<script>
+  var GW = {
+    name: 'GiveWell (unrestricted)',
+    href: 'http://www.givewell.org/',
+  };
+  var SCI = {
+    name: 'Schistosomiasis Control Initiative',
+    href: 'http://www3.imperial.ac.uk/schisto',
+  };
+  var GD = {
+    name: 'GiveDirectly',
+    href: 'https://www.givedirectly.org/',
+  };
+  var AMF = {
+    name: 'Against Malaria Foundation',
+    href: 'https://www.againstmalaria.com/',
+  };
+  var TBA = {
+    name: 'TBD (earmarked for future)'
+  }
+  var donations = [
+    { year: 2014, day: '12/31', org: GW, amount: 5000 },
+    { year: 2014, day: '12/31', org: TBA, amount: 5000 },
+    { year: 2013, day: '11/22', org: GW, amount: 6000 },
+    { year: 2013, day: '7/6', org: AMF, amount: 200 },
+    { year: 2013, day: '7/6', org: SCI, amount: 80 },
+    { year: 2013, day: '7/6', org: GD, amount: 120 },
+  ];
+  var income = {
+    2014: 35000,
+    2013: 8000,
+  };
+
+  function fmt(amt) {
+    if (amt < 1000) {
+      return '$' + amt;
+    }
+    else {
+      return fmt(Math.floor(amt / 1000)) + ',' + _.padLeft(amt % 1000, 3, '0');
+    }
+  }
+
+  function getYearText(don) {
+    return don.year + '<br/> (income: ' + fmt(income[don.year]) + ')';
+  }
+  var getDay = _.property('day');
+  var getOrg = function (don) {
+    if (don.org.href == undefined) {
+      return don.org.name;
+    }
+    else {
+      return '<a href="' + don.org.href + '">' + don.org.name + '</a>';
+    }
+  }
+  function getDate(don) {
+    return don.day + '/' + don.year;
+  }
+  function chronView() {
+    doView(getYearText, [getDay, getOrg], 1, ['Year', 'Date', 'Organization']);
+  }
+  function orgView() {
+    doView(getOrg, [getDate], 0, ['Organization', 'Date']);
+  }
+
+  function doView(grouper, otherfields, total_ix, colnames) {
+    var h = $('#donations-header');
+    var b = $('#donations-body');
+    h.empty();
+    b.empty()
+    _.forEach(colnames, function (colname) {
+      h.append($('<th />').text(colname));
+    });
+    h.append($('<th />').text('Amount'));
+    _.forEach(_.groupBy(donations, grouper),
+      function (group_dons, grptxt) {
+        var n = group_dons.length;
+        if (n > 1) {
+          n += 1;
+        }
+        var don = group_dons[0];
+        var row = $('<tr><td rowspan="' + n + '">' + grptxt + '</td></td>');
+        doDon(row, otherfields, don);
+        b.append(row);
+        var total = don.amount;
+        for (var i = 1; i < group_dons.length; i++) {
+          don = group_dons[i];
+          total += don.amount;
+          row = $('<tr />');
+          doDon(row, otherfields, don);
+          b.append(row);
+        }
+        if (n > 1) {
+          row = $('<tr />');
+          for (var i = 0; i < otherfields.length; i++) {
+            if (i == total_ix) {
+              row.append($('<td>(total)</td>'));
+            }
+            else {
+              row.append($('<td>&ndash;</td>'));
+            }
+          }
+          row.append($('<td />').text(fmt(total)));
+          b.append(row);
+        }
+      });
+  }
+  function doDon(row, otherfields, don) {
+    for (var i = 0; i < otherfields.length; i++) {
+      row.append($('<td />').html(otherfields[i](don)))
+    }
+    row.append($('<td />').text(fmt(don.amount)));
+  }
+
+  chronView();
+
+</script>
 
 {% endblock %}

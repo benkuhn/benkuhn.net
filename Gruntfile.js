@@ -5,7 +5,8 @@ module.exports = function(grunt) {
         'edit': [ 'src/js/editor.js',
                   'bower_components/codemirror/lib/codemirror.js',
                   'bower_components/codemirror/mode/markdown/markdown.js' ],
-        'main': [ 'bower_components/jquery/dist/jquery.js' ],
+        'main': [ 'bower_components/jquery/dist/jquery.js',
+                  'bower_components/lodash/lodash.js' ],
     }
 
     var CSS = {
