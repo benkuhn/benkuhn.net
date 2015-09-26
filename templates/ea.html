@@ -28,6 +28,10 @@ I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which me
 <p>(I've also received numerous donations as gifts, but I don't include them here since I sometimes don't even know the amounts.)</p>
 
 <script>
+  var EAPA = {
+    name: 'EA Policy Analytics',
+    href: 'http://www.effective-altruism.com/ea/js/ea_ventures_request_for_projects_update/',
+  };
   var GW = {
     name: 'GiveWell (unrestricted)',
     href: 'http://www.givewell.org/',
@@ -48,6 +52,7 @@ I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which me
     name: 'TBD (earmarked for future)'
   }
   var donations = [
+    { year: 2015, day: '6/7', org: EAPA, amount: 6333 },
     { year: 2014, day: '12/31', org: GW, amount: 5000 },
     { year: 2014, day: '12/31', org: TBA, amount: 5000 },
     { year: 2013, day: '11/22', org: GW, amount: 6000 },
@@ -56,11 +61,15 @@ I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which me
     { year: 2013, day: '7/6', org: GD, amount: 120 },
   ];
   var income = {
+    2015: '???',
     2014: 35000,
     2013: 8000,
   };
 
   function fmt(amt) {
+    if (!_.isNumber(amt)) {
+      return '' + amt;
+    }
     if (amt < 1000) {
       return '$' + amt;
     }
