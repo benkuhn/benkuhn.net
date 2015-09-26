@@ -21,7 +21,7 @@ def by_slug(request, slug=''):
     editable = request.user.is_authenticated() and request.user.is_staff
     if post.state == Post.HIDDEN and not editable:
         raise Http404
-    comments = list(post.comments.all().order_by('date'))
+    comments = [c for c in post.comments.filter(parent__isnull=True).order_by('date').prefetch_related('post', 'children', 'children__post')]
     if (request.method == 'POST'):
         # we're being commented on
         do_comment(request, post, request.POST, all_comments=comments)
@@ -116,6 +116,10 @@ def do_comment(request, post, attrs, all_comments=None):
     if is_spam:
         return False # don't even save spam comments
     comment.spam = False
+
+    ### set the comment's parent if necessary
+    if 'parent' in attrs and attrs['parent'] != '':
+        comment.parent_id = int(attrs['parent'])
 
     if isLegitEmail(comment.email):
         comment.subscribed = attrs.get('subscribed', False)

@@ -1,0 +1,15 @@
+{% if comment.spam and not user.is_staff %}
+{% else %}
+<div class="comment" id="comment-{{ comment.id }}">
+  {% include "comment_single.html" with comment=comment %}
+  <div class="comment-replies">
+    {% for reply in comment.children.all %}
+    {% include "comment_single.html" with comment=reply %}
+    {% endfor %}
+    <p>
+    {% include "comment_show.html" with id=comment.get_form_id text="reply" %}
+    {% include "comment_form.html" with parent=comment.id id=comment.get_form_id %}
+    </p>
+  </div>
+</div>
+{% endif %}

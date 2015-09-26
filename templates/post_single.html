@@ -52,7 +52,7 @@
     {% else %}
       <strong>{{ comment_count }} comment{{ comment_count|pluralize }}</strong>
     {% endif %}
-    &bull; {% include "comment_show.html" with id="comment-form-top" %}
+    &bull; {% include "comment_show.html" with id="comment-form-top" text="comment" %}
   </p>
   <div class="comments">
     {% include "comment_form.html" with id="comment-form-top" %}
@@ -60,11 +60,11 @@
       {% if comment.spam and not user.is_staff %}
       {% else %}
       <hr class="med" />
-      {% include "comment_single.html" %}
+      {% include "comment_toplevel.html" %}
       {% endif %}
     {% endfor %}
     {% if comment_count %}
-    <p>{% include "comment_show.html" with id="comment-form-bottom" %}</p>
+    <p>{% include "comment_show.html" with id="comment-form-bottom" text="comment" %}</p>
     {% include "comment_form.html" with id="comment-form-bottom" %}
     {% endif %}
   </div>

@@ -38,19 +38,25 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
+    parent = models.ForeignKey('self', related_name='children', null=True)
     name = models.CharField(max_length=300)
     email = models.CharField(max_length=300)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     spam = models.BooleanField()
     subscribed = models.BooleanField()
+
     def get_absolute_url(self):
         return self.post.get_absolute_url() + '#comment-' + str(self.id)
+
     def __unicode__(self):
         ret = u'"%s" by %s' % (self.text[:30], self.email)
         if self.spam:
             ret += u' [SPAM]'
         return ret
+
+    def get_form_id(self):
+        return "comment-form-" + str(self.id)
 
 class Subscription(models.Model):
     email = models.CharField(max_length=300)
