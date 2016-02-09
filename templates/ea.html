@@ -48,23 +48,32 @@ I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which me
     name: 'Against Malaria Foundation',
     href: 'https://www.againstmalaria.com/',
   };
+  var CE = {
+    name: 'Charity Entrepreneurship',
+    href: 'http://www.charityentrepreneurship.com/',
+  };
   var TBA = {
     name: 'TBD (earmarked for future)'
-  }
+  };
   var donations = [
+    { year: 2015, day: '12/31', org: CE, amount: 2000 },
+    { year: 2015, day: '12/31', org: GW, amount: 10000 },
     { year: 2015, day: '6/7', org: EAPA, amount: 6333 },
-    { year: 2014, day: '12/31', org: GW, amount: 5000 },
-    { year: 2014, day: '12/31', org: TBA, amount: 5000 },
+    { year: 2014, day: '12/31', org: GW, amount: 10000 },
     { year: 2013, day: '11/22', org: GW, amount: 6000 },
     { year: 2013, day: '7/6', org: AMF, amount: 200 },
     { year: 2013, day: '7/6', org: SCI, amount: 80 },
     { year: 2013, day: '7/6', org: GD, amount: 120 },
   ];
   var income = {
-    2015: '???',
-    2014: 35000,
-    2013: 8000,
+    2015: 78412,
+    2014: 40089,
+    2013: 8278,
   };
+  var expenses = {
+    2015: 23338,
+    2014: 18432
+  }
 
   function fmt(amt) {
     if (!_.isNumber(amt)) {
@@ -79,7 +88,11 @@ I'm a member of [Giving What We Can](https://www.givingwhatwecan.org/), which me
   }
 
   function getYearText(don) {
-    return don.year + '<br/> (income: ' + fmt(income[don.year]) + ')';
+    var txt = don.year + '<br/> (AGI: ' + fmt(income[don.year]);
+    if (expenses[don.year]) {
+        txt += ';<br/>expenses: ' + fmt(expenses[don.year]);
+    }
+    return txt + ')';
   }
   var getDay = _.property('day');
   var getOrg = function (don) {
