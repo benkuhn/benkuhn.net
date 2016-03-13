@@ -25,9 +25,10 @@ pset = [
     url(r'^bestof/$', 'django.views.generic.simple.redirect_to', {'url': '/more/'}),
     url(r'^collected/(?P<tags>[\w,-]*)$', 'posts.views.collect'),
     # redirects for compatibility reasons
+    url(r'^about/$', 'django.views.generic.simple.redirect_to', {'url': '/'}),
     url(r'^archive/(?P<page>\d+)/$', 'django.views.generic.simple.redirect_to', {'url':'/blog/%(page)s/'}),
     ]
-for name in ['contact', 'projects', 'privacy', 'about', 'more', 'ea', 'follow']:
+for name in ['contact', 'projects', 'privacy', 'more', 'ea', 'follow']:
     pset.append(url(r'^' + name + '/$', 'bknet.views.' + name, name=name))
 
 urlpatterns = patterns('', *pset
