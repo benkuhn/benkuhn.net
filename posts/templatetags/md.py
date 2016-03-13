@@ -1,6 +1,7 @@
 from django import template
 import posts.md
 import md5, re
+import datetime
 
 register = template.Library()
 
@@ -51,6 +52,13 @@ def deorphan(string):
 @register.filter(name='titlify')
 def titlify(string):
     return deorphan(quotify(string))
+
+@register.filter(name='fancydate')
+def fancydate(dt):
+    if dt.year < datetime.datetime.now().year:
+        return dt.strftime('%B %Y')
+    else:
+        return dt.strftime('%B %-d')
 
 class MarkdownNode(template.Node):
     def __init__(self, nodelist, **kwargs):

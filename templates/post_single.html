@@ -11,7 +11,7 @@
       {% endfor %}
       &bull;
       <span class="post_date">
-        {{ post.datePosted|date:"F j" }}
+        {{ post.datePosted|fancydate }}
       </span>
       {% if user.is_authenticated and user.is_staff %}
       <a href="{{ post.get_edit_url }}">(edit)</a>
@@ -37,7 +37,7 @@
   <div class="post">
     {% markdown %}{{ post.text|safe }}{% endmarkdown %}
     <p class="post_date_big">
-      &mdash;{{ post.datePosted|date:"F Y" }}
+      &mdash;{{ post.datePosted|fancydate }}
     </p>
   </div>
 
